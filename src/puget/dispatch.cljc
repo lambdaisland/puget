@@ -6,8 +6,8 @@
   A simple example is a map from classes to values, which can be used directly
   as a lookup function."
   (:require
-    [clojure.string :as str]))
-
+   [clojure.string :as str]
+   #?(:cljs [goog.string :as gstring])))
 
 ;; ## Logical Dispatch
 
@@ -18,10 +18,11 @@
   dispatchers in the sequence."
   ([dispatchers]
    {:pre [(sequential? dispatchers)]}
-   (let [candidates (remove nil? dispatchers)]
+   (let [candidates (remove nil? dispatchers)
+         no-chain-lookup-provided-message "chained-lookup must be provided at least one dispatch function to try."]
      (when (empty? candidates)
-       (throw (IllegalArgumentException.
-                "chained-lookup must be provided at least one dispatch function to try.")))
+       #?(:clj (throw (IllegalArgumentException. no-chain-lookup-provided-message)) ; I don't like this. Candidate for improvement
+          :cljs (throw no-chain-lookup-provided-message)))
      (if (= 1 (count candidates))
        (first candidates)
        (fn lookup
@@ -84,7 +85,6 @@
                        (remove interfaces implemented))
                  (conj interfaces iface)))))))
 
-
 (defn inheritance-lookup
   "Builds a dispatcher which looks up a type by looking up the type itself,
   then attempting to look up its ancestor classes, implemented interfaces, and
@@ -93,19 +93,23 @@
   (fn lookup
     [t]
     (or
-      ; Look up base class and ancestors up to the base class.
-      (some dispatch (lineage t))
+                                        ; Look up base class and ancestors up to the base class.
+     (some dispatch (lineage t))
 
-      ; Look up interfaces and collect candidates.
-      (let [candidates (remove (comp nil? first)
-                               (map (juxt dispatch identity)
-                                    (find-interfaces t)))]
-        (case (count candidates)
-          0 nil
-          1 (ffirst candidates)
-          (throw (RuntimeException.
-                   (format "%d candidates found for interfaces on dispatch type %s: %s"
-                           (count candidates) t (str/join ", " (map second candidates)))))))
+                                        ; Look up interfaces and collect candidates.
+     (let [candidates (remove (comp nil? first)
+                              (map (juxt dispatch identity)
+                                   (find-interfaces t)))
+           wrong-number-of-candidates-message "%d candidates found for interfaces on dispatch type %s: %s"]
+       (case (count candidates)
+         0 nil
+         1 (ffirst candidates)
+         #?(:clj (throw RuntimeException.
+                        (format wrong-number-of-candidates-message
+                                (count candidates) t (str/join ", " (map second candidates))))
+            :cljs (throw (format wrong-number-of-candidates-message
+                                 (count candidates) t (str/join ", " (map second candidates)))))))
 
-      ; Look up Object base class.
-      (dispatch Object))))
+                                        ; Look up Object base class.
+     #?(:clj (dispatch Object)
+        :cljs (dispatch js/Object)))))
