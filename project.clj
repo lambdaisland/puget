@@ -12,7 +12,9 @@
 
   :dependencies
   [[org.clojure/clojure "1.10.0"]
-   [org.clojure/clojurescript "1.10.520"]
+   [org.clojure/clojurescript "1.10.520"
+    :exclusions [[com.google.errorprone/error_prone_annotations]
+                 [com.google.code.findbugs/jsr305]]]
    [lein-cljsbuild "1.1.7"]
    [mvxcvi/arrangement "1.2.0"]
    [fipp "0.6.21"]]
@@ -25,8 +27,10 @@
                              "deploy" ["do" "clean," "deploy" "clojars"]}}}
   :cljsbuild {:builds
               {:test {:source-paths ["target/classes" "target/test-classes"]
-                      :compiler {:output-to "target/testable.js"
-                                 :optimizations :simple
+                      :compiler {:output-to "target/testable_code.js"
+                                 :optimizations :none
+                                 :cache-analysis true
+                                 :source-map true
                                  :pretty-print true}}}
               :test-commands {"test" ["node" :node-runner "target/testable.js"]}}
   )
