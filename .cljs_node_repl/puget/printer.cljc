@@ -298,12 +298,14 @@
 (def java-handlers
   "Map of print handlers for Java types. This supports syntax for regular
   expressions, dates, UUIDs, and futures."
-  {:a;java.lang.Class
+  {java.lang.Class
    (fn class-handler
      [printer value]
      (format-unknown printer value "Class" (.getName ^Class value)))
 
-   :b;java.util.concurrent.Future
+   
+
+   java.util.concurrent.Future
    (fn future-handler
      [printer value]
      (let [doc (if (future-done? value)
@@ -311,7 +313,7 @@
                  (color/document printer :nil "pending"))]
        (format-unknown printer value "Future" doc)))
 
-   :c;java.util.Date
+   java.util.Date
    (tagged-handler
      'inst
      #(-> "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00"
@@ -319,14 +321,16 @@
           (doto (.setTimeZone (java.util.TimeZone/getTimeZone "GMT")))
           (.format ^java.util.Date %)))
 
-   :d;java.util.UUID
+   #?(:clj java.util.UUID
+      :cljs uuid)
    (tagged-handler 'uuid str)})
 
 
 (def clojure-handlers
   "Map of print handlers for 'primary' Clojure types. These should take
   precedence over the handlers in `clojure-interface-handlers`."
-  {clojure.lang.Atom
+  {#?(:clj clojure.lang.Atom
+      :cljs atom)
    (fn atom-handler
      [printer value]
      (format-unknown printer value "Atom" (format-doc printer @value)))

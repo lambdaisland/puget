@@ -13,14 +13,14 @@ puget.color.html.style_attribute = cljs.core.PersistentHashMap.fromArrays([new c
  *   keywords usable in a :color-scheme value
  */
 puget.color.html.style = (function puget$color$html$style(codes){
-var attributes = cljs.core.map.call(null,(function (p1__1321_SHARP_){
-return cljs.core.get.call(null,puget.color.html.style_attribute,p1__1321_SHARP_,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"color","color",1011675173),cljs.core.name.call(null,p1__1321_SHARP_)], null));
+var attributes = cljs.core.map.call(null,(function (p1__1322_SHARP_){
+return cljs.core.get.call(null,puget.color.html.style_attribute,p1__1322_SHARP_,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"color","color",1011675173),cljs.core.name.call(null,p1__1322_SHARP_)], null));
 }),codes);
 return ["style=\"",cljs.core.str.cljs$core$IFn$_invoke$arity$1(clojure.string.join.call(null,";",cljs.core.map.call(null,((function (attributes){
-return (function (p__1326){
-var vec__1327 = p__1326;
-var k = cljs.core.nth.call(null,vec__1327,(0),null);
-var v = cljs.core.nth.call(null,vec__1327,(1),null);
+return (function (p__1327){
+var vec__1328 = p__1327;
+var k = cljs.core.nth.call(null,vec__1328,(0),null);
+var v = cljs.core.nth.call(null,vec__1328,(1),null);
 return [cljs.core.name.call(null,k),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(v)].join('');
 });})(attributes))
 ,attributes))),"\""].join('');
@@ -41,14 +41,14 @@ var escaped_text = puget.color.html.escape_html_text.call(null,node);
 var spans = clojure.string.split.call(null,escaped_text,/(?=&)/);
 return cljs.core.reduce.call(null,((function (escaped_text,spans){
 return (function (acc,span){
-var G__1330 = cljs.core.first.call(null,span);
-if(cljs.core._EQ_.call(null,null,G__1330)){
+var G__1331 = cljs.core.first.call(null,span);
+if(cljs.core._EQ_.call(null,null,G__1331)){
 return acc;
 } else {
-if(cljs.core._EQ_.call(null,"&",G__1330)){
-var vec__1331 = clojure.string.split.call(null,span,/(?<=;)/,(2));
-var escaped = cljs.core.nth.call(null,vec__1331,(0),null);
-var span__$1 = cljs.core.nth.call(null,vec__1331,(1),null);
+if(cljs.core._EQ_.call(null,"&",G__1331)){
+var vec__1332 = clojure.string.split.call(null,span,/(?<=;)/,(2));
+var escaped = cljs.core.nth.call(null,vec__1332,(0),null);
+var span__$1 = cljs.core.nth.call(null,vec__1332,(1),null);
 var acc__$1 = cljs.core.conj.call(null,acc,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"escaped","escaped",-1007929769),escaped], null));
 if(cljs.core.seq.call(null,span__$1)){
 return cljs.core.conj.call(null,acc__$1,span__$1);

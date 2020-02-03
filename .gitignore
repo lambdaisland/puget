@@ -1,5 +1,9 @@
 /checkouts/
 /target/
+.cljs_node_repl
+node_modules
+out
+bin
 .lein-*
 .nrepl-port
 pom.xml

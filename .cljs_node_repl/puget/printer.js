@@ -34,8 +34,8 @@ return cljs.core.type.call(null,x);
  */
 puget.printer.to_hex_string = (function puget$printer$to_hex_string(input_string){
 var transformed_string = input_string.toString((16));
-var G__715 = cljs.core.count.call(null,transformed_string);
-switch (G__715) {
+var G__1342 = cljs.core.count.call(null,transformed_string);
+switch (G__1342) {
 case (0):
 return "00";
 
@@ -61,21 +61,21 @@ puget.printer.merge_options = (function puget$printer$merge_options(a,b){
 var colors = cljs.core.merge.call(null,new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295).cljs$core$IFn$_invoke$arity$1(a),new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295).cljs$core$IFn$_invoke$arity$1(b));
 return cljs.core.assoc.call(null,cljs.core.merge.call(null,a,b),new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295),colors);
 });
-var ret__4776__auto___721 = (function (){
+var ret__4776__auto___1348 = (function (){
 /**
  * Executes the given expressions with a set of options merged into the current
  *   option map.
  */
 puget.printer.with_options = (function puget$printer$with_options(var_args){
 var args__4736__auto__ = [];
-var len__4730__auto___722 = arguments.length;
-var i__4731__auto___723 = (0);
+var len__4730__auto___1349 = arguments.length;
+var i__4731__auto___1350 = (0);
 while(true){
-if((i__4731__auto___723 < len__4730__auto___722)){
-args__4736__auto__.push((arguments[i__4731__auto___723]));
+if((i__4731__auto___1350 < len__4730__auto___1349)){
+args__4736__auto__.push((arguments[i__4731__auto___1350]));
 
-var G__724 = (i__4731__auto___723 + (1));
-i__4731__auto___723 = G__724;
+var G__1351 = (i__4731__auto___1350 + (1));
+i__4731__auto___1350 = G__1351;
 continue;
 } else {
 }
@@ -93,15 +93,15 @@ return cljs.core.sequence.call(null,cljs.core.seq.call(null,cljs.core.concat.cal
 puget.printer.with_options.cljs$lang$maxFixedArity = (3);
 
 /** @this {Function} */
-puget.printer.with_options.cljs$lang$applyTo = (function (seq717){
-var G__718 = cljs.core.first.call(null,seq717);
-var seq717__$1 = cljs.core.next.call(null,seq717);
-var G__719 = cljs.core.first.call(null,seq717__$1);
-var seq717__$2 = cljs.core.next.call(null,seq717__$1);
-var G__720 = cljs.core.first.call(null,seq717__$2);
-var seq717__$3 = cljs.core.next.call(null,seq717__$2);
+puget.printer.with_options.cljs$lang$applyTo = (function (seq1344){
+var G__1345 = cljs.core.first.call(null,seq1344);
+var seq1344__$1 = cljs.core.next.call(null,seq1344);
+var G__1346 = cljs.core.first.call(null,seq1344__$1);
+var seq1344__$2 = cljs.core.next.call(null,seq1344__$1);
+var G__1347 = cljs.core.first.call(null,seq1344__$2);
+var seq1344__$3 = cljs.core.next.call(null,seq1344__$2);
 var self__4717__auto__ = this;
-return self__4717__auto__.cljs$core$IFn$_invoke$arity$variadic(G__718,G__719,G__720,seq717__$3);
+return self__4717__auto__.cljs$core$IFn$_invoke$arity$variadic(G__1345,G__1346,G__1347,seq1344__$3);
 });
 
 return null;
@@ -109,20 +109,20 @@ return null;
 ;
 puget.printer.with_options.cljs$lang$macro = true;
 
-var ret__4776__auto___728 = (function (){
+var ret__4776__auto___1355 = (function (){
 /**
  * Executes the given expressions with colored output enabled.
  */
 puget.printer.with_color = (function puget$printer$with_color(var_args){
 var args__4736__auto__ = [];
-var len__4730__auto___729 = arguments.length;
-var i__4731__auto___730 = (0);
+var len__4730__auto___1356 = arguments.length;
+var i__4731__auto___1357 = (0);
 while(true){
-if((i__4731__auto___730 < len__4730__auto___729)){
-args__4736__auto__.push((arguments[i__4731__auto___730]));
+if((i__4731__auto___1357 < len__4730__auto___1356)){
+args__4736__auto__.push((arguments[i__4731__auto___1357]));
 
-var G__731 = (i__4731__auto___730 + (1));
-i__4731__auto___730 = G__731;
+var G__1358 = (i__4731__auto___1357 + (1));
+i__4731__auto___1357 = G__1358;
 continue;
 } else {
 }
@@ -140,13 +140,13 @@ return cljs.core.sequence.call(null,cljs.core.seq.call(null,cljs.core.concat.cal
 puget.printer.with_color.cljs$lang$maxFixedArity = (2);
 
 /** @this {Function} */
-puget.printer.with_color.cljs$lang$applyTo = (function (seq725){
-var G__726 = cljs.core.first.call(null,seq725);
-var seq725__$1 = cljs.core.next.call(null,seq725);
-var G__727 = cljs.core.first.call(null,seq725__$1);
-var seq725__$2 = cljs.core.next.call(null,seq725__$1);
+puget.printer.with_color.cljs$lang$applyTo = (function (seq1352){
+var G__1353 = cljs.core.first.call(null,seq1352);
+var seq1352__$1 = cljs.core.next.call(null,seq1352);
+var G__1354 = cljs.core.first.call(null,seq1352__$1);
+var seq1352__$2 = cljs.core.next.call(null,seq1352__$1);
 var self__4717__auto__ = this;
-return self__4717__auto__.cljs$core$IFn$_invoke$arity$variadic(G__726,G__727,seq725__$2);
+return self__4717__auto__.cljs$core$IFn$_invoke$arity$variadic(G__1353,G__1354,seq1352__$2);
 });
 
 return null;
@@ -161,8 +161,8 @@ puget.printer.with_color.cljs$lang$macro = true;
  *   function still obeys the `:print-color` option.
  */
 puget.printer.color_text = (function puget$printer$color_text(var_args){
-var G__733 = arguments.length;
-switch (G__733) {
+var G__1360 = arguments.length;
+switch (G__1360) {
 case 2:
 return puget.printer.color_text.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -206,22 +206,22 @@ return cljs.core.seq.call(null,coll);
 puget.printer.common_key_ns = (function puget$printer$common_key_ns(m){
 if(cljs.core.every_QMARK_.call(null,cljs.core.every_pred.call(null,cljs.core.keyword_QMARK_,cljs.core.namespace),cljs.core.keys.call(null,m))){
 var nsf = cljs.core.frequencies.call(null,cljs.core.map.call(null,cljs.core.namespace,cljs.core.keys.call(null,m)));
-var vec__735 = cljs.core.apply.call(null,cljs.core.max_key,cljs.core.val,nsf);
-var common = cljs.core.nth.call(null,vec__735,(0),null);
-var n = cljs.core.nth.call(null,vec__735,(1),null);
+var vec__1362 = cljs.core.apply.call(null,cljs.core.max_key,cljs.core.val,nsf);
+var common = cljs.core.nth.call(null,vec__1362,(0),null);
+var n = cljs.core.nth.call(null,vec__1362,(1),null);
 if(((cljs.core.count.call(null,m) / (2)) < n)){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [common,cljs.core.into.call(null,cljs.core.empty.call(null,m),cljs.core.map.call(null,((function (nsf,vec__735,common,n){
-return (function puget$printer$common_key_ns_$_strip_common(p__738){
-var vec__739 = p__738;
-var k = cljs.core.nth.call(null,vec__739,(0),null);
-var v = cljs.core.nth.call(null,vec__739,(1),null);
-var e = vec__739;
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [common,cljs.core.into.call(null,cljs.core.empty.call(null,m),cljs.core.map.call(null,((function (nsf,vec__1362,common,n){
+return (function puget$printer$common_key_ns_$_strip_common(p__1365){
+var vec__1366 = p__1365;
+var k = cljs.core.nth.call(null,vec__1366,(0),null);
+var v = cljs.core.nth.call(null,vec__1366,(1),null);
+var e = vec__1366;
 if(cljs.core._EQ_.call(null,common,cljs.core.namespace.call(null,k))){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.keyword.call(null,cljs.core.name.call(null,k)),v], null);
 } else {
 return e;
 }
-});})(nsf,vec__735,common,n))
+});})(nsf,vec__1362,common,n))
 ),m)], null);
 } else {
 return null;
@@ -234,8 +234,8 @@ return null;
  * Renders common syntax doc for an unknown representation of a value.
  */
 puget.printer.format_unknown = (function puget$printer$format_unknown(var_args){
-var G__743 = arguments.length;
-switch (G__743) {
+var G__1370 = arguments.length;
+switch (G__1370) {
 case 2:
 return puget.printer.format_unknown.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -334,23 +334,23 @@ return puget.printer.format_doc.call(null,printer,cljs.core.tagged_literal.call(
  * Map of print handlers for Java types. This supports syntax for regular
  *   expressions, dates, UUIDs, and futures.
  */
-puget.printer.java_handlers = new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"a","a",-2123407586),(function puget$printer$class_handler(printer,value){
+puget.printer.java_handlers = cljs.core.PersistentArrayMap.createAsIfByAssoc([java.lang.Class,(function puget$printer$class_handler(printer,value){
 return puget.printer.format_unknown.call(null,printer,value,"Class",value.getName());
-}),new cljs.core.Keyword(null,"b","b",1482224470),(function puget$printer$future_handler(printer,value){
+}),java.util.concurrent.Future,(function puget$printer$future_handler(printer,value){
 var doc = (cljs.core.truth_(puget.printer.future_done_QMARK_.call(null,value))?puget.printer.format_doc.call(null,printer,cljs.core.deref.call(null,value)):puget.color.document.call(null,printer,new cljs.core.Keyword(null,"nil","nil",99600501),"pending"));
 return puget.printer.format_unknown.call(null,printer,value,"Future",doc);
-}),new cljs.core.Keyword(null,"c","c",-1763192079),puget.printer.tagged_handler.call(null,new cljs.core.Symbol(null,"inst","inst",-2008473268,null),(function (p1__745_SHARP_){
-return (function (){var G__746 = (new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS-00:00"));
-G__746.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
+}),java.util.Date,puget.printer.tagged_handler.call(null,new cljs.core.Symbol(null,"inst","inst",-2008473268,null),(function (p1__1372_SHARP_){
+return (function (){var G__1373 = (new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS-00:00"));
+G__1373.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
 
-return G__746;
-})().format(p1__745_SHARP_);
-})),new cljs.core.Keyword(null,"d","d",1972142424),puget.printer.tagged_handler.call(null,new cljs.core.Symbol(null,"uuid","uuid",-504564192,null),cljs.core.str)], null);
+return G__1373;
+})().format(p1__1372_SHARP_);
+})),cljs.core.uuid,puget.printer.tagged_handler.call(null,new cljs.core.Symbol(null,"uuid","uuid",-504564192,null),cljs.core.str)]);
 /**
  * Map of print handlers for 'primary' Clojure types. These should take
  *   precedence over the handlers in `clojure-interface-handlers`.
  */
-puget.printer.clojure_handlers = cljs.core.PersistentArrayMap.createAsIfByAssoc([clojure.lang.Atom,(function puget$printer$atom_handler(printer,value){
+puget.printer.clojure_handlers = cljs.core.PersistentArrayMap.createAsIfByAssoc([cljs.core.atom,(function puget$printer$atom_handler(printer,value){
 return puget.printer.format_unknown.call(null,printer,value,"Atom",puget.printer.format_doc.call(null,printer,cljs.core.deref.call(null,value)));
 }),clojure.lang.Delay,(function puget$printer$delay_handler(printer,value){
 var doc = ((cljs.core.realized_QMARK_.call(null,value))?puget.printer.format_doc.call(null,printer,cljs.core.deref.call(null,value)):puget.color.document.call(null,printer,new cljs.core.Keyword(null,"nil","nil",99600501),"pending"));
@@ -365,17 +365,17 @@ puget.printer.clojure_interface_handlers = cljs.core.PersistentArrayMap.createAs
 var doc = ((cljs.core.realized_QMARK_.call(null,value))?puget.printer.format_doc.call(null,printer,cljs.core.deref.call(null,value)):puget.color.document.call(null,printer,new cljs.core.Keyword(null,"nil","nil",99600501),"pending"));
 return puget.printer.format_unknown.call(null,printer,value,doc);
 }),clojure.lang.Fn,(function puget$printer$fn_handler(printer,value){
-var doc = (function (){var vec__748 = clojure.string.split.call(null,clojure.string.replace_first.call(null,puget.printer.get_type_name.call(null,value),"$","/"),/\$/);
-var seq__749 = cljs.core.seq.call(null,vec__748);
-var first__750 = cljs.core.first.call(null,seq__749);
-var seq__749__$1 = cljs.core.next.call(null,seq__749);
-var vname = first__750;
-var tail = seq__749__$1;
+var doc = (function (){var vec__1375 = clojure.string.split.call(null,clojure.string.replace_first.call(null,puget.printer.get_type_name.call(null,value),"$","/"),/\$/);
+var seq__1376 = cljs.core.seq.call(null,vec__1375);
+var first__1377 = cljs.core.first.call(null,seq__1376);
+var seq__1376__$1 = cljs.core.next.call(null,seq__1376);
+var vname = first__1377;
+var tail = seq__1376__$1;
 if(cljs.core.seq.call(null,tail)){
-return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(vname),"[",cljs.core.str.cljs$core$IFn$_invoke$arity$1(clojure.string.join.call(null,"/",cljs.core.map.call(null,((function (vec__748,seq__749,first__750,seq__749__$1,vname,tail){
-return (function (p1__747_SHARP_){
-return cljs.core.first.call(null,clojure.string.split.call(null,p1__747_SHARP_,/__/));
-});})(vec__748,seq__749,first__750,seq__749__$1,vname,tail))
+return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(vname),"[",cljs.core.str.cljs$core$IFn$_invoke$arity$1(clojure.string.join.call(null,"/",cljs.core.map.call(null,((function (vec__1375,seq__1376,first__1377,seq__1376__$1,vname,tail){
+return (function (p1__1374_SHARP_){
+return cljs.core.first.call(null,clojure.string.split.call(null,p1__1374_SHARP_,/__/));
+});})(vec__1375,seq__1376,first__1377,seq__1376__$1,vname,tail))
 ,tail))),"]"].join('');
 } else {
 return vname;
@@ -423,18 +423,18 @@ var this__4385__auto____$1 = this;
 return this__4385__auto____$1.cljs$core$ILookup$_lookup$arity$3(null,k__4386__auto__,null);
 });
 
-puget.printer.CanonicalPrinter.prototype.cljs$core$ILookup$_lookup$arity$3 = (function (this__4387__auto__,k753,else__4388__auto__){
+puget.printer.CanonicalPrinter.prototype.cljs$core$ILookup$_lookup$arity$3 = (function (this__4387__auto__,k1380,else__4388__auto__){
 var self__ = this;
 var this__4387__auto____$1 = this;
-var G__757 = k753;
-var G__757__$1 = (((G__757 instanceof cljs.core.Keyword))?G__757.fqn:null);
-switch (G__757__$1) {
+var G__1384 = k1380;
+var G__1384__$1 = (((G__1384 instanceof cljs.core.Keyword))?G__1384.fqn:null);
+switch (G__1384__$1) {
 case "print-handlers":
 return self__.print_handlers;
 
 break;
 default:
-return cljs.core.get.call(null,self__.__extmap,k753,else__4388__auto__);
+return cljs.core.get.call(null,self__.__extmap,k1380,else__4388__auto__);
 
 }
 });
@@ -443,10 +443,10 @@ puget.printer.CanonicalPrinter.prototype.cljs$core$IKVReduce$_kv_reduce$arity$3 
 var self__ = this;
 var this__4404__auto____$1 = this;
 return cljs.core.reduce.call(null,((function (this__4404__auto____$1){
-return (function (ret__4407__auto__,p__758){
-var vec__759 = p__758;
-var k__4408__auto__ = cljs.core.nth.call(null,vec__759,(0),null);
-var v__4409__auto__ = cljs.core.nth.call(null,vec__759,(1),null);
+return (function (ret__4407__auto__,p__1385){
+var vec__1386 = p__1385;
+var k__4408__auto__ = cljs.core.nth.call(null,vec__1386,(0),null);
+var v__4409__auto__ = cljs.core.nth.call(null,vec__1386,(1),null);
 return f__4405__auto__.call(null,ret__4407__auto__,k__4408__auto__,v__4409__auto__);
 });})(this__4404__auto____$1))
 ,init__4406__auto__,this__4404__auto____$1);
@@ -463,10 +463,10 @@ return cljs.core.pr_sequential_writer.call(null,writer__4400__auto__,cljs.core.p
 return cljs.core.pr_sequential_writer.call(null,writer__4400__auto__,pr_pair__4402__auto__,"#puget.printer.CanonicalPrinter{",", ","}",opts__4401__auto__,cljs.core.concat.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901),self__.print_handlers],null))], null),self__.__extmap));
 });
 
-puget.printer.CanonicalPrinter.prototype.cljs$core$IIterable$_iterator$arity$1 = (function (G__752){
+puget.printer.CanonicalPrinter.prototype.cljs$core$IIterable$_iterator$arity$1 = (function (G__1379){
 var self__ = this;
-var G__752__$1 = this;
-return (new cljs.core.RecordIter((0),G__752__$1,1,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901)], null),(cljs.core.truth_(self__.__extmap)?cljs.core._iterator.call(null,self__.__extmap):cljs.core.nil_iter.call(null))));
+var G__1379__$1 = this;
+return (new cljs.core.RecordIter((0),G__1379__$1,1,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901)], null),(cljs.core.truth_(self__.__extmap)?cljs.core._iterator.call(null,self__.__extmap):cljs.core.nil_iter.call(null))));
 });
 
 puget.printer.CanonicalPrinter.prototype.cljs$core$IMeta$_meta$arity$1 = (function (this__4383__auto__){
@@ -505,10 +505,10 @@ return h__4243__auto____$1;
 }
 });
 
-puget.printer.CanonicalPrinter.prototype.cljs$core$IEquiv$_equiv$arity$2 = (function (this754,other755){
+puget.printer.CanonicalPrinter.prototype.cljs$core$IEquiv$_equiv$arity$2 = (function (this1381,other1382){
 var self__ = this;
-var this754__$1 = this;
-return (((!((other755 == null)))) && ((this754__$1.constructor === other755.constructor)) && (cljs.core._EQ_.call(null,this754__$1.print_handlers,other755.print_handlers)) && (cljs.core._EQ_.call(null,this754__$1.__extmap,other755.__extmap)));
+var this1381__$1 = this;
+return (((!((other1382 == null)))) && ((this1381__$1.constructor === other1382.constructor)) && (cljs.core._EQ_.call(null,this1381__$1.print_handlers,other1382.print_handlers)) && (cljs.core._EQ_.call(null,this1381__$1.__extmap,other1382.__extmap)));
 });
 
 puget.printer.CanonicalPrinter.prototype.cljs$core$IMap$_dissoc$arity$2 = (function (this__4394__auto__,k__4395__auto__){
@@ -521,15 +521,15 @@ return (new puget.printer.CanonicalPrinter(self__.print_handlers,self__.__meta,c
 }
 });
 
-puget.printer.CanonicalPrinter.prototype.cljs$core$IAssociative$_assoc$arity$3 = (function (this__4392__auto__,k__4393__auto__,G__752){
+puget.printer.CanonicalPrinter.prototype.cljs$core$IAssociative$_assoc$arity$3 = (function (this__4392__auto__,k__4393__auto__,G__1379){
 var self__ = this;
 var this__4392__auto____$1 = this;
-var pred__762 = cljs.core.keyword_identical_QMARK_;
-var expr__763 = k__4393__auto__;
-if(cljs.core.truth_(pred__762.call(null,new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901),expr__763))){
-return (new puget.printer.CanonicalPrinter(G__752,self__.__meta,self__.__extmap,null));
+var pred__1389 = cljs.core.keyword_identical_QMARK_;
+var expr__1390 = k__4393__auto__;
+if(cljs.core.truth_(pred__1389.call(null,new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901),expr__1390))){
+return (new puget.printer.CanonicalPrinter(G__1379,self__.__meta,self__.__extmap,null));
 } else {
-return (new puget.printer.CanonicalPrinter(self__.print_handlers,self__.__meta,cljs.core.assoc.call(null,self__.__extmap,k__4393__auto__,G__752),null));
+return (new puget.printer.CanonicalPrinter(self__.print_handlers,self__.__meta,cljs.core.assoc.call(null,self__.__extmap,k__4393__auto__,G__1379),null));
 }
 });
 
@@ -612,8 +612,8 @@ var self__ = this;
 var this$__$1 = this;
 if(cljs.core.seq.call(null,value)){
 var entries = cljs.core.map.call(null,((function (this$__$1){
-return (function (p1__751_SHARP_){
-return (new cljs.core.PersistentVector(null,4,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"span","span",1394872991),puget.printer.format_doc.call(null,this$__$1,cljs.core.key.call(null,p1__751_SHARP_))," ",puget.printer.format_doc.call(null,this$__$1,cljs.core.val.call(null,p1__751_SHARP_))],null));
+return (function (p1__1378_SHARP_){
+return (new cljs.core.PersistentVector(null,4,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"span","span",1394872991),puget.printer.format_doc.call(null,this$__$1,cljs.core.key.call(null,p1__1378_SHARP_))," ",puget.printer.format_doc.call(null,this$__$1,cljs.core.val.call(null,p1__1378_SHARP_))],null));
 });})(this$__$1))
 ,cljs.core.sort_by.call(null,cljs.core.first,arrangement.core.rank,value));
 return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"group","group",582596132),"{",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"align","align",1964212802),cljs.core.interpose.call(null," ",entries)], null),"}"], null);
@@ -668,10 +668,10 @@ return "[]";
 }
 });
 
-puget.printer.CanonicalPrinter.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (this__4384__auto__,G__752){
+puget.printer.CanonicalPrinter.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (this__4384__auto__,G__1379){
 var self__ = this;
 var this__4384__auto____$1 = this;
-return (new puget.printer.CanonicalPrinter(self__.print_handlers,G__752,self__.__extmap,self__.__hash));
+return (new puget.printer.CanonicalPrinter(self__.print_handlers,G__1379,self__.__extmap,self__.__hash));
 });
 
 puget.printer.CanonicalPrinter.prototype.cljs$core$ICollection$_conj$arity$2 = (function (this__4390__auto__,entry__4391__auto__){
@@ -708,23 +708,23 @@ return (new puget.printer.CanonicalPrinter(print_handlers,null,null,null));
 /**
  * Factory function for puget.printer/CanonicalPrinter, taking a map of keywords to field values.
  */
-puget.printer.map__GT_CanonicalPrinter = (function puget$printer$map__GT_CanonicalPrinter(G__756){
-var extmap__4424__auto__ = (function (){var G__765 = cljs.core.dissoc.call(null,G__756,new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901));
-if(cljs.core.record_QMARK_.call(null,G__756)){
-return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,G__765);
+puget.printer.map__GT_CanonicalPrinter = (function puget$printer$map__GT_CanonicalPrinter(G__1383){
+var extmap__4424__auto__ = (function (){var G__1392 = cljs.core.dissoc.call(null,G__1383,new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901));
+if(cljs.core.record_QMARK_.call(null,G__1383)){
+return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,G__1392);
 } else {
-return G__765;
+return G__1392;
 }
 })();
-return (new puget.printer.CanonicalPrinter(new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901).cljs$core$IFn$_invoke$arity$1(G__756),null,cljs.core.not_empty.call(null,extmap__4424__auto__),null));
+return (new puget.printer.CanonicalPrinter(new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901).cljs$core$IFn$_invoke$arity$1(G__1383),null,cljs.core.not_empty.call(null,extmap__4424__auto__),null));
 });
 
 /**
  * Constructs a new canonical printer with the given handler dispatch.
  */
 puget.printer.canonical_printer = (function puget$printer$canonical_printer(var_args){
-var G__768 = arguments.length;
-switch (G__768) {
+var G__1395 = arguments.length;
+switch (G__1395) {
 case 0:
 return puget.printer.canonical_printer.cljs$core$IFn$_invoke$arity$0();
 
@@ -794,12 +794,12 @@ var this__4385__auto____$1 = this;
 return this__4385__auto____$1.cljs$core$ILookup$_lookup$arity$3(null,k__4386__auto__,null);
 });
 
-puget.printer.PrettyPrinter.prototype.cljs$core$ILookup$_lookup$arity$3 = (function (this__4387__auto__,k771,else__4388__auto__){
+puget.printer.PrettyPrinter.prototype.cljs$core$ILookup$_lookup$arity$3 = (function (this__4387__auto__,k1398,else__4388__auto__){
 var self__ = this;
 var this__4387__auto____$1 = this;
-var G__775 = k771;
-var G__775__$1 = (((G__775 instanceof cljs.core.Keyword))?G__775.fqn:null);
-switch (G__775__$1) {
+var G__1402 = k1398;
+var G__1402__$1 = (((G__1402 instanceof cljs.core.Keyword))?G__1402.fqn:null);
+switch (G__1402__$1) {
 case "width":
 return self__.width;
 
@@ -849,7 +849,7 @@ return self__.print_fallback;
 
 break;
 default:
-return cljs.core.get.call(null,self__.__extmap,k771,else__4388__auto__);
+return cljs.core.get.call(null,self__.__extmap,k1398,else__4388__auto__);
 
 }
 });
@@ -858,10 +858,10 @@ puget.printer.PrettyPrinter.prototype.cljs$core$IKVReduce$_kv_reduce$arity$3 = (
 var self__ = this;
 var this__4404__auto____$1 = this;
 return cljs.core.reduce.call(null,((function (this__4404__auto____$1){
-return (function (ret__4407__auto__,p__776){
-var vec__777 = p__776;
-var k__4408__auto__ = cljs.core.nth.call(null,vec__777,(0),null);
-var v__4409__auto__ = cljs.core.nth.call(null,vec__777,(1),null);
+return (function (ret__4407__auto__,p__1403){
+var vec__1404 = p__1403;
+var k__4408__auto__ = cljs.core.nth.call(null,vec__1404,(0),null);
+var v__4409__auto__ = cljs.core.nth.call(null,vec__1404,(1),null);
 return f__4405__auto__.call(null,ret__4407__auto__,k__4408__auto__,v__4409__auto__);
 });})(this__4404__auto____$1))
 ,init__4406__auto__,this__4404__auto____$1);
@@ -878,10 +878,10 @@ return cljs.core.pr_sequential_writer.call(null,writer__4400__auto__,cljs.core.p
 return cljs.core.pr_sequential_writer.call(null,writer__4400__auto__,pr_pair__4402__auto__,"#puget.printer.PrettyPrinter{",", ","}",opts__4401__auto__,cljs.core.concat.call(null,new cljs.core.PersistentVector(null, 12, 5, cljs.core.PersistentVector.EMPTY_NODE, [(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"width","width",-384071477),self__.width],null)),(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"print-meta","print-meta",1034114598),self__.print_meta],null)),(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"sort-keys","sort-keys",1311511993),self__.sort_keys],null)),(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"map-delimiter","map-delimiter",-671741092),self__.map_delimiter],null)),(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"map-coll-separator","map-coll-separator",609661315),self__.map_coll_separator],null)),(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"namespace-maps","namespace-maps",-2037027128),self__.namespace_maps],null)),(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"seq-limit","seq-limit",-1165916492),self__.seq_limit],null)),(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"print-color","print-color",722462614),self__.print_color],null)),(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"color-markup","color-markup",266742518),self__.color_markup],null)),(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295),self__.color_scheme],null)),(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901),self__.print_handlers],null)),(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[new cljs.core.Keyword(null,"print-fallback","print-fallback",-1229211894),self__.print_fallback],null))], null),self__.__extmap));
 });
 
-puget.printer.PrettyPrinter.prototype.cljs$core$IIterable$_iterator$arity$1 = (function (G__770){
+puget.printer.PrettyPrinter.prototype.cljs$core$IIterable$_iterator$arity$1 = (function (G__1397){
 var self__ = this;
-var G__770__$1 = this;
-return (new cljs.core.RecordIter((0),G__770__$1,12,new cljs.core.PersistentVector(null, 12, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"width","width",-384071477),new cljs.core.Keyword(null,"print-meta","print-meta",1034114598),new cljs.core.Keyword(null,"sort-keys","sort-keys",1311511993),new cljs.core.Keyword(null,"map-delimiter","map-delimiter",-671741092),new cljs.core.Keyword(null,"map-coll-separator","map-coll-separator",609661315),new cljs.core.Keyword(null,"namespace-maps","namespace-maps",-2037027128),new cljs.core.Keyword(null,"seq-limit","seq-limit",-1165916492),new cljs.core.Keyword(null,"print-color","print-color",722462614),new cljs.core.Keyword(null,"color-markup","color-markup",266742518),new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295),new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901),new cljs.core.Keyword(null,"print-fallback","print-fallback",-1229211894)], null),(cljs.core.truth_(self__.__extmap)?cljs.core._iterator.call(null,self__.__extmap):cljs.core.nil_iter.call(null))));
+var G__1397__$1 = this;
+return (new cljs.core.RecordIter((0),G__1397__$1,12,new cljs.core.PersistentVector(null, 12, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"width","width",-384071477),new cljs.core.Keyword(null,"print-meta","print-meta",1034114598),new cljs.core.Keyword(null,"sort-keys","sort-keys",1311511993),new cljs.core.Keyword(null,"map-delimiter","map-delimiter",-671741092),new cljs.core.Keyword(null,"map-coll-separator","map-coll-separator",609661315),new cljs.core.Keyword(null,"namespace-maps","namespace-maps",-2037027128),new cljs.core.Keyword(null,"seq-limit","seq-limit",-1165916492),new cljs.core.Keyword(null,"print-color","print-color",722462614),new cljs.core.Keyword(null,"color-markup","color-markup",266742518),new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295),new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901),new cljs.core.Keyword(null,"print-fallback","print-fallback",-1229211894)], null),(cljs.core.truth_(self__.__extmap)?cljs.core._iterator.call(null,self__.__extmap):cljs.core.nil_iter.call(null))));
 });
 
 puget.printer.PrettyPrinter.prototype.cljs$core$IMeta$_meta$arity$1 = (function (this__4383__auto__){
@@ -920,10 +920,10 @@ return h__4243__auto____$1;
 }
 });
 
-puget.printer.PrettyPrinter.prototype.cljs$core$IEquiv$_equiv$arity$2 = (function (this772,other773){
+puget.printer.PrettyPrinter.prototype.cljs$core$IEquiv$_equiv$arity$2 = (function (this1399,other1400){
 var self__ = this;
-var this772__$1 = this;
-return (((!((other773 == null)))) && ((this772__$1.constructor === other773.constructor)) && (cljs.core._EQ_.call(null,this772__$1.width,other773.width)) && (cljs.core._EQ_.call(null,this772__$1.print_meta,other773.print_meta)) && (cljs.core._EQ_.call(null,this772__$1.sort_keys,other773.sort_keys)) && (cljs.core._EQ_.call(null,this772__$1.map_delimiter,other773.map_delimiter)) && (cljs.core._EQ_.call(null,this772__$1.map_coll_separator,other773.map_coll_separator)) && (cljs.core._EQ_.call(null,this772__$1.namespace_maps,other773.namespace_maps)) && (cljs.core._EQ_.call(null,this772__$1.seq_limit,other773.seq_limit)) && (cljs.core._EQ_.call(null,this772__$1.print_color,other773.print_color)) && (cljs.core._EQ_.call(null,this772__$1.color_markup,other773.color_markup)) && (cljs.core._EQ_.call(null,this772__$1.color_scheme,other773.color_scheme)) && (cljs.core._EQ_.call(null,this772__$1.print_handlers,other773.print_handlers)) && (cljs.core._EQ_.call(null,this772__$1.print_fallback,other773.print_fallback)) && (cljs.core._EQ_.call(null,this772__$1.__extmap,other773.__extmap)));
+var this1399__$1 = this;
+return (((!((other1400 == null)))) && ((this1399__$1.constructor === other1400.constructor)) && (cljs.core._EQ_.call(null,this1399__$1.width,other1400.width)) && (cljs.core._EQ_.call(null,this1399__$1.print_meta,other1400.print_meta)) && (cljs.core._EQ_.call(null,this1399__$1.sort_keys,other1400.sort_keys)) && (cljs.core._EQ_.call(null,this1399__$1.map_delimiter,other1400.map_delimiter)) && (cljs.core._EQ_.call(null,this1399__$1.map_coll_separator,other1400.map_coll_separator)) && (cljs.core._EQ_.call(null,this1399__$1.namespace_maps,other1400.namespace_maps)) && (cljs.core._EQ_.call(null,this1399__$1.seq_limit,other1400.seq_limit)) && (cljs.core._EQ_.call(null,this1399__$1.print_color,other1400.print_color)) && (cljs.core._EQ_.call(null,this1399__$1.color_markup,other1400.color_markup)) && (cljs.core._EQ_.call(null,this1399__$1.color_scheme,other1400.color_scheme)) && (cljs.core._EQ_.call(null,this1399__$1.print_handlers,other1400.print_handlers)) && (cljs.core._EQ_.call(null,this1399__$1.print_fallback,other1400.print_fallback)) && (cljs.core._EQ_.call(null,this1399__$1.__extmap,other1400.__extmap)));
 });
 
 puget.printer.PrettyPrinter.prototype.cljs$core$IMap$_dissoc$arity$2 = (function (this__4394__auto__,k__4395__auto__){
@@ -936,48 +936,48 @@ return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.so
 }
 });
 
-puget.printer.PrettyPrinter.prototype.cljs$core$IAssociative$_assoc$arity$3 = (function (this__4392__auto__,k__4393__auto__,G__770){
+puget.printer.PrettyPrinter.prototype.cljs$core$IAssociative$_assoc$arity$3 = (function (this__4392__auto__,k__4393__auto__,G__1397){
 var self__ = this;
 var this__4392__auto____$1 = this;
-var pred__780 = cljs.core.keyword_identical_QMARK_;
-var expr__781 = k__4393__auto__;
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"width","width",-384071477),expr__781))){
-return (new puget.printer.PrettyPrinter(G__770,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
+var pred__1407 = cljs.core.keyword_identical_QMARK_;
+var expr__1408 = k__4393__auto__;
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"width","width",-384071477),expr__1408))){
+return (new puget.printer.PrettyPrinter(G__1397,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
 } else {
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"print-meta","print-meta",1034114598),expr__781))){
-return (new puget.printer.PrettyPrinter(self__.width,G__770,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"print-meta","print-meta",1034114598),expr__1408))){
+return (new puget.printer.PrettyPrinter(self__.width,G__1397,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
 } else {
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"sort-keys","sort-keys",1311511993),expr__781))){
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,G__770,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"sort-keys","sort-keys",1311511993),expr__1408))){
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,G__1397,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
 } else {
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"map-delimiter","map-delimiter",-671741092),expr__781))){
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,G__770,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"map-delimiter","map-delimiter",-671741092),expr__1408))){
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,G__1397,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
 } else {
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"map-coll-separator","map-coll-separator",609661315),expr__781))){
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,G__770,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"map-coll-separator","map-coll-separator",609661315),expr__1408))){
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,G__1397,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
 } else {
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"namespace-maps","namespace-maps",-2037027128),expr__781))){
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,G__770,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"namespace-maps","namespace-maps",-2037027128),expr__1408))){
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,G__1397,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
 } else {
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"seq-limit","seq-limit",-1165916492),expr__781))){
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,G__770,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"seq-limit","seq-limit",-1165916492),expr__1408))){
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,G__1397,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
 } else {
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"print-color","print-color",722462614),expr__781))){
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,G__770,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"print-color","print-color",722462614),expr__1408))){
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,G__1397,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
 } else {
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"color-markup","color-markup",266742518),expr__781))){
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,G__770,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"color-markup","color-markup",266742518),expr__1408))){
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,G__1397,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
 } else {
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295),expr__781))){
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,G__770,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295),expr__1408))){
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,G__1397,self__.print_handlers,self__.print_fallback,self__.__meta,self__.__extmap,null));
 } else {
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901),expr__781))){
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,G__770,self__.print_fallback,self__.__meta,self__.__extmap,null));
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901),expr__1408))){
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,G__1397,self__.print_fallback,self__.__meta,self__.__extmap,null));
 } else {
-if(cljs.core.truth_(pred__780.call(null,new cljs.core.Keyword(null,"print-fallback","print-fallback",-1229211894),expr__781))){
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,G__770,self__.__meta,self__.__extmap,null));
+if(cljs.core.truth_(pred__1407.call(null,new cljs.core.Keyword(null,"print-fallback","print-fallback",-1229211894),expr__1408))){
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,G__1397,self__.__meta,self__.__extmap,null));
 } else {
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,cljs.core.assoc.call(null,self__.__extmap,k__4393__auto__,G__770),null));
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,self__.__meta,cljs.core.assoc.call(null,self__.__extmap,k__4393__auto__,G__1397),null));
 }
 }
 }
@@ -1031,9 +1031,9 @@ return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMP
 puget.printer.PrettyPrinter.prototype.fipp$visit$IVisitor$visit_unknown$arity$2 = (function (this$,value){
 var self__ = this;
 var this$__$1 = this;
-var G__783 = self__.print_fallback;
-var G__783__$1 = (((G__783 instanceof cljs.core.Keyword))?G__783.fqn:null);
-switch (G__783__$1) {
+var G__1410 = self__.print_fallback;
+var G__1410__$1 = (((G__1410 instanceof cljs.core.Keyword))?G__1410.fqn:null);
+switch (G__1410__$1) {
 case "pretty":
 return puget.printer.format_unknown.call(null,this$__$1,value);
 
@@ -1066,7 +1066,7 @@ puget.printer.PrettyPrinter.prototype.fipp$visit$IVisitor$visit_seq$arity$2 = (f
 var self__ = this;
 var this$__$1 = this;
 if(cljs.core.seq.call(null,value)){
-var vec__784 = (cljs.core.truth_((function (){var and__4120__auto__ = self__.seq_limit;
+var vec__1411 = (cljs.core.truth_((function (){var and__4120__auto__ = self__.seq_limit;
 if(cljs.core.truth_(and__4120__auto__)){
 return (self__.seq_limit > (0));
 } else {
@@ -1075,13 +1075,13 @@ return and__4120__auto__;
 })())?(function (){var head = cljs.core.take.call(null,self__.seq_limit,value);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [head,(self__.seq_limit <= cljs.core.count.call(null,head))], null);
 })():new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.seq.call(null,value),false], null));
-var values = cljs.core.nth.call(null,vec__784,(0),null);
-var trimmed_QMARK_ = cljs.core.nth.call(null,vec__784,(1),null);
-var elements = (function (){var G__787 = (((cljs.core.first.call(null,values) instanceof cljs.core.Symbol))?cljs.core.cons.call(null,puget.color.document.call(null,this$__$1,new cljs.core.Keyword(null,"function-symbol","function-symbol",-1336068270),cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first.call(null,values))),cljs.core.map.call(null,cljs.core.partial.call(null,puget.printer.format_doc,this$__$1),cljs.core.rest.call(null,values))):cljs.core.map.call(null,cljs.core.partial.call(null,puget.printer.format_doc,this$__$1),values));
+var values = cljs.core.nth.call(null,vec__1411,(0),null);
+var trimmed_QMARK_ = cljs.core.nth.call(null,vec__1411,(1),null);
+var elements = (function (){var G__1414 = (((cljs.core.first.call(null,values) instanceof cljs.core.Symbol))?cljs.core.cons.call(null,puget.color.document.call(null,this$__$1,new cljs.core.Keyword(null,"function-symbol","function-symbol",-1336068270),cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first.call(null,values))),cljs.core.map.call(null,cljs.core.partial.call(null,puget.printer.format_doc,this$__$1),cljs.core.rest.call(null,values))):cljs.core.map.call(null,cljs.core.partial.call(null,puget.printer.format_doc,this$__$1),values));
 if(cljs.core.truth_(trimmed_QMARK_)){
-return cljs.core.concat.call(null,G__787,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [puget.color.document.call(null,this$__$1,new cljs.core.Keyword(null,"nil","nil",99600501),"...")], null));
+return cljs.core.concat.call(null,G__1414,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [puget.color.document.call(null,this$__$1,new cljs.core.Keyword(null,"nil","nil",99600501),"...")], null));
 } else {
-return G__787;
+return G__1414;
 }
 })();
 return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"group","group",582596132),puget.color.document.call(null,this$__$1,new cljs.core.Keyword(null,"delimiter","delimiter",-1766618000),"("),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"align","align",1964212802),cljs.core.interpose.call(null,new cljs.core.Keyword(null,"line","line",212345235),elements)], null),puget.color.document.call(null,this$__$1,new cljs.core.Keyword(null,"delimiter","delimiter",-1766618000),")")], null);
@@ -1099,10 +1099,10 @@ return puget.color.document.call(null,this$__$1,new cljs.core.Keyword(null,"bool
 puget.printer.PrettyPrinter.prototype.fipp$visit$IVisitor$visit_tagged$arity$2 = (function (this$,value){
 var self__ = this;
 var this$__$1 = this;
-var map__788 = value;
-var map__788__$1 = (((((!((map__788 == null))))?(((((map__788.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__788.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__788):map__788);
-var tag = cljs.core.get.call(null,map__788__$1,new cljs.core.Keyword(null,"tag","tag",-1290361223));
-var form = cljs.core.get.call(null,map__788__$1,new cljs.core.Keyword(null,"form","form",-1624062471));
+var map__1415 = value;
+var map__1415__$1 = (((((!((map__1415 == null))))?(((((map__1415.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__1415.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__1415):map__1415);
+var tag = cljs.core.get.call(null,map__1415__$1,new cljs.core.Keyword(null,"tag","tag",-1290361223));
+var form = cljs.core.get.call(null,map__1415__$1,new cljs.core.Keyword(null,"form","form",-1624062471));
 return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"group","group",582596132),puget.color.document.call(null,this$__$1,new cljs.core.Keyword(null,"tag","tag",-1290361223),["#",cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"tag","tag",-1290361223).cljs$core$IFn$_invoke$arity$1(value))].join('')),((cljs.core.coll_QMARK_.call(null,form))?new cljs.core.Keyword(null,"line","line",212345235):" "),puget.printer.format_doc.call(null,this$__$1,new cljs.core.Keyword(null,"form","form",-1624062471).cljs$core$IFn$_invoke$arity$1(value))], null);
 });
 
@@ -1116,9 +1116,9 @@ puget.printer.PrettyPrinter.prototype.fipp$visit$IVisitor$visit_map$arity$2 = (f
 var self__ = this;
 var this$__$1 = this;
 if(cljs.core.seq.call(null,value)){
-var vec__790 = (cljs.core.truth_(self__.namespace_maps)?puget.printer.common_key_ns.call(null,value):null);
-var common_ns = cljs.core.nth.call(null,vec__790,(0),null);
-var stripped = cljs.core.nth.call(null,vec__790,(1),null);
+var vec__1417 = (cljs.core.truth_(self__.namespace_maps)?puget.printer.common_key_ns.call(null,value):null);
+var common_ns = cljs.core.nth.call(null,vec__1417,(0),null);
+var stripped = cljs.core.nth.call(null,vec__1417,(1),null);
 var kvs = puget.printer.order_collection.call(null,self__.sort_keys,(function (){var or__4131__auto__ = stripped;
 if(cljs.core.truth_(or__4131__auto__)){
 return or__4131__auto__;
@@ -1126,13 +1126,13 @@ return or__4131__auto__;
 return value;
 }
 })(),cljs.core.partial.call(null,cljs.core.sort_by,cljs.core.first,arrangement.core.rank));
-var entries = cljs.core.map.call(null,((function (vec__790,common_ns,stripped,kvs,this$__$1){
-return (function (p__793){
-var vec__794 = p__793;
-var k = cljs.core.nth.call(null,vec__794,(0),null);
-var v = cljs.core.nth.call(null,vec__794,(1),null);
+var entries = cljs.core.map.call(null,((function (vec__1417,common_ns,stripped,kvs,this$__$1){
+return (function (p__1420){
+var vec__1421 = p__1420;
+var k = cljs.core.nth.call(null,vec__1421,(0),null);
+var v = cljs.core.nth.call(null,vec__1421,(1),null);
 return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),puget.printer.format_doc.call(null,this$__$1,k),((cljs.core.coll_QMARK_.call(null,v))?self__.map_coll_separator:" "),puget.printer.format_doc.call(null,this$__$1,v)], null);
-});})(vec__790,common_ns,stripped,kvs,this$__$1))
+});})(vec__1417,common_ns,stripped,kvs,this$__$1))
 ,kvs);
 var map_doc = new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"group","group",582596132),puget.color.document.call(null,this$__$1,new cljs.core.Keyword(null,"delimiter","delimiter",-1766618000),"{"),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"align","align",1964212802),cljs.core.interpose.call(null,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),self__.map_delimiter,new cljs.core.Keyword(null,"line","line",212345235)], null),entries)], null),puget.color.document.call(null,this$__$1,new cljs.core.Keyword(null,"delimiter","delimiter",-1766618000),"}")], null);
 if(cljs.core.truth_(common_ns)){
@@ -1190,10 +1190,10 @@ return puget.color.document.call(null,this$__$1,new cljs.core.Keyword(null,"deli
 }
 });
 
-puget.printer.PrettyPrinter.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (this__4384__auto__,G__770){
+puget.printer.PrettyPrinter.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (this__4384__auto__,G__1397){
 var self__ = this;
 var this__4384__auto____$1 = this;
-return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,G__770,self__.__extmap,self__.__hash));
+return (new puget.printer.PrettyPrinter(self__.width,self__.print_meta,self__.sort_keys,self__.map_delimiter,self__.map_coll_separator,self__.namespace_maps,self__.seq_limit,self__.print_color,self__.color_markup,self__.color_scheme,self__.print_handlers,self__.print_fallback,G__1397,self__.__extmap,self__.__hash));
 });
 
 puget.printer.PrettyPrinter.prototype.cljs$core$ICollection$_conj$arity$2 = (function (this__4390__auto__,entry__4391__auto__){
@@ -1230,15 +1230,15 @@ return (new puget.printer.PrettyPrinter(width,print_meta,sort_keys,map_delimiter
 /**
  * Factory function for puget.printer/PrettyPrinter, taking a map of keywords to field values.
  */
-puget.printer.map__GT_PrettyPrinter = (function puget$printer$map__GT_PrettyPrinter(G__774){
-var extmap__4424__auto__ = (function (){var G__797 = cljs.core.dissoc.call(null,G__774,new cljs.core.Keyword(null,"width","width",-384071477),new cljs.core.Keyword(null,"print-meta","print-meta",1034114598),new cljs.core.Keyword(null,"sort-keys","sort-keys",1311511993),new cljs.core.Keyword(null,"map-delimiter","map-delimiter",-671741092),new cljs.core.Keyword(null,"map-coll-separator","map-coll-separator",609661315),new cljs.core.Keyword(null,"namespace-maps","namespace-maps",-2037027128),new cljs.core.Keyword(null,"seq-limit","seq-limit",-1165916492),new cljs.core.Keyword(null,"print-color","print-color",722462614),new cljs.core.Keyword(null,"color-markup","color-markup",266742518),new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295),new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901),new cljs.core.Keyword(null,"print-fallback","print-fallback",-1229211894));
-if(cljs.core.record_QMARK_.call(null,G__774)){
-return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,G__797);
+puget.printer.map__GT_PrettyPrinter = (function puget$printer$map__GT_PrettyPrinter(G__1401){
+var extmap__4424__auto__ = (function (){var G__1424 = cljs.core.dissoc.call(null,G__1401,new cljs.core.Keyword(null,"width","width",-384071477),new cljs.core.Keyword(null,"print-meta","print-meta",1034114598),new cljs.core.Keyword(null,"sort-keys","sort-keys",1311511993),new cljs.core.Keyword(null,"map-delimiter","map-delimiter",-671741092),new cljs.core.Keyword(null,"map-coll-separator","map-coll-separator",609661315),new cljs.core.Keyword(null,"namespace-maps","namespace-maps",-2037027128),new cljs.core.Keyword(null,"seq-limit","seq-limit",-1165916492),new cljs.core.Keyword(null,"print-color","print-color",722462614),new cljs.core.Keyword(null,"color-markup","color-markup",266742518),new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295),new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901),new cljs.core.Keyword(null,"print-fallback","print-fallback",-1229211894));
+if(cljs.core.record_QMARK_.call(null,G__1401)){
+return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,G__1424);
 } else {
-return G__797;
+return G__1424;
 }
 })();
-return (new puget.printer.PrettyPrinter(new cljs.core.Keyword(null,"width","width",-384071477).cljs$core$IFn$_invoke$arity$1(G__774),new cljs.core.Keyword(null,"print-meta","print-meta",1034114598).cljs$core$IFn$_invoke$arity$1(G__774),new cljs.core.Keyword(null,"sort-keys","sort-keys",1311511993).cljs$core$IFn$_invoke$arity$1(G__774),new cljs.core.Keyword(null,"map-delimiter","map-delimiter",-671741092).cljs$core$IFn$_invoke$arity$1(G__774),new cljs.core.Keyword(null,"map-coll-separator","map-coll-separator",609661315).cljs$core$IFn$_invoke$arity$1(G__774),new cljs.core.Keyword(null,"namespace-maps","namespace-maps",-2037027128).cljs$core$IFn$_invoke$arity$1(G__774),new cljs.core.Keyword(null,"seq-limit","seq-limit",-1165916492).cljs$core$IFn$_invoke$arity$1(G__774),new cljs.core.Keyword(null,"print-color","print-color",722462614).cljs$core$IFn$_invoke$arity$1(G__774),new cljs.core.Keyword(null,"color-markup","color-markup",266742518).cljs$core$IFn$_invoke$arity$1(G__774),new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295).cljs$core$IFn$_invoke$arity$1(G__774),new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901).cljs$core$IFn$_invoke$arity$1(G__774),new cljs.core.Keyword(null,"print-fallback","print-fallback",-1229211894).cljs$core$IFn$_invoke$arity$1(G__774),null,cljs.core.not_empty.call(null,extmap__4424__auto__),null));
+return (new puget.printer.PrettyPrinter(new cljs.core.Keyword(null,"width","width",-384071477).cljs$core$IFn$_invoke$arity$1(G__1401),new cljs.core.Keyword(null,"print-meta","print-meta",1034114598).cljs$core$IFn$_invoke$arity$1(G__1401),new cljs.core.Keyword(null,"sort-keys","sort-keys",1311511993).cljs$core$IFn$_invoke$arity$1(G__1401),new cljs.core.Keyword(null,"map-delimiter","map-delimiter",-671741092).cljs$core$IFn$_invoke$arity$1(G__1401),new cljs.core.Keyword(null,"map-coll-separator","map-coll-separator",609661315).cljs$core$IFn$_invoke$arity$1(G__1401),new cljs.core.Keyword(null,"namespace-maps","namespace-maps",-2037027128).cljs$core$IFn$_invoke$arity$1(G__1401),new cljs.core.Keyword(null,"seq-limit","seq-limit",-1165916492).cljs$core$IFn$_invoke$arity$1(G__1401),new cljs.core.Keyword(null,"print-color","print-color",722462614).cljs$core$IFn$_invoke$arity$1(G__1401),new cljs.core.Keyword(null,"color-markup","color-markup",266742518).cljs$core$IFn$_invoke$arity$1(G__1401),new cljs.core.Keyword(null,"color-scheme","color-scheme",-903842295).cljs$core$IFn$_invoke$arity$1(G__1401),new cljs.core.Keyword(null,"print-handlers","print-handlers",-1768057901).cljs$core$IFn$_invoke$arity$1(G__1401),new cljs.core.Keyword(null,"print-fallback","print-fallback",-1229211894).cljs$core$IFn$_invoke$arity$1(G__1401),null,cljs.core.not_empty.call(null,extmap__4424__auto__),null));
 });
 
 /**
@@ -1251,34 +1251,34 @@ return puget.printer.map__GT_PrettyPrinter.call(null,cljs.core.reduce.call(null,
  * Prints a value using the given printer.
  */
 puget.printer.render_out = (function puget$printer$render_out(printer,value){
-var _STAR_print_meta_STAR__orig_val__800 = cljs.core._STAR_print_meta_STAR_;
-var _STAR_print_meta_STAR__temp_val__801 = false;
-cljs.core._STAR_print_meta_STAR_ = _STAR_print_meta_STAR__temp_val__801;
+var _STAR_print_meta_STAR__orig_val__1427 = cljs.core._STAR_print_meta_STAR_;
+var _STAR_print_meta_STAR__temp_val__1428 = false;
+cljs.core._STAR_print_meta_STAR_ = _STAR_print_meta_STAR__temp_val__1428;
 
 try{return fipp.engine.pprint_document.call(null,puget.printer.format_doc.call(null,printer,value),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"width","width",-384071477),new cljs.core.Keyword(null,"width","width",-384071477).cljs$core$IFn$_invoke$arity$1(printer)], null));
-}finally {cljs.core._STAR_print_meta_STAR_ = _STAR_print_meta_STAR__orig_val__800;
+}finally {cljs.core._STAR_print_meta_STAR_ = _STAR_print_meta_STAR__orig_val__1427;
 }});
 /**
  * Renders a value to a string using the given printer.
  */
 puget.printer.render_str = (function puget$printer$render_str(printer,value){
 return clojure.string.trim_newline.call(null,(function (){var sb__4661__auto__ = (new goog.string.StringBuffer());
-var _STAR_print_newline_STAR__orig_val__802_806 = cljs.core._STAR_print_newline_STAR_;
-var _STAR_print_fn_STAR__orig_val__803_807 = cljs.core._STAR_print_fn_STAR_;
-var _STAR_print_newline_STAR__temp_val__804_808 = true;
-var _STAR_print_fn_STAR__temp_val__805_809 = ((function (_STAR_print_newline_STAR__orig_val__802_806,_STAR_print_fn_STAR__orig_val__803_807,_STAR_print_newline_STAR__temp_val__804_808,sb__4661__auto__){
+var _STAR_print_newline_STAR__orig_val__1429_1433 = cljs.core._STAR_print_newline_STAR_;
+var _STAR_print_fn_STAR__orig_val__1430_1434 = cljs.core._STAR_print_fn_STAR_;
+var _STAR_print_newline_STAR__temp_val__1431_1435 = true;
+var _STAR_print_fn_STAR__temp_val__1432_1436 = ((function (_STAR_print_newline_STAR__orig_val__1429_1433,_STAR_print_fn_STAR__orig_val__1430_1434,_STAR_print_newline_STAR__temp_val__1431_1435,sb__4661__auto__){
 return (function (x__4662__auto__){
 return sb__4661__auto__.append(x__4662__auto__);
-});})(_STAR_print_newline_STAR__orig_val__802_806,_STAR_print_fn_STAR__orig_val__803_807,_STAR_print_newline_STAR__temp_val__804_808,sb__4661__auto__))
+});})(_STAR_print_newline_STAR__orig_val__1429_1433,_STAR_print_fn_STAR__orig_val__1430_1434,_STAR_print_newline_STAR__temp_val__1431_1435,sb__4661__auto__))
 ;
-cljs.core._STAR_print_newline_STAR_ = _STAR_print_newline_STAR__temp_val__804_808;
+cljs.core._STAR_print_newline_STAR_ = _STAR_print_newline_STAR__temp_val__1431_1435;
 
-cljs.core._STAR_print_fn_STAR_ = _STAR_print_fn_STAR__temp_val__805_809;
+cljs.core._STAR_print_fn_STAR_ = _STAR_print_fn_STAR__temp_val__1432_1436;
 
 try{puget.printer.render_out.call(null,printer,value);
-}finally {cljs.core._STAR_print_fn_STAR_ = _STAR_print_fn_STAR__orig_val__803_807;
+}finally {cljs.core._STAR_print_fn_STAR_ = _STAR_print_fn_STAR__orig_val__1430_1434;
 
-cljs.core._STAR_print_newline_STAR_ = _STAR_print_newline_STAR__orig_val__802_806;
+cljs.core._STAR_print_newline_STAR_ = _STAR_print_newline_STAR__orig_val__1429_1433;
 }
 return cljs.core.str.cljs$core$IFn$_invoke$arity$1(sb__4661__auto__);
 })());
@@ -1288,8 +1288,8 @@ return cljs.core.str.cljs$core$IFn$_invoke$arity$1(sb__4661__auto__);
  *   default *options* map.
  */
 puget.printer.pprint = (function puget$printer$pprint(var_args){
-var G__811 = arguments.length;
-switch (G__811) {
+var G__1438 = arguments.length;
+switch (G__1438) {
 case 1:
 return puget.printer.pprint.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -1318,8 +1318,8 @@ puget.printer.pprint.cljs$lang$maxFixedArity = 2;
  * Pretty-print a value to a string.
  */
 puget.printer.pprint_str = (function puget$printer$pprint_str(var_args){
-var G__814 = arguments.length;
-switch (G__814) {
+var G__1441 = arguments.length;
+switch (G__1441) {
 case 1:
 return puget.printer.pprint_str.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -1348,8 +1348,8 @@ puget.printer.pprint_str.cljs$lang$maxFixedArity = 2;
  * Like pprint, but turns on colored output.
  */
 puget.printer.cprint = (function puget$printer$cprint(var_args){
-var G__817 = arguments.length;
-switch (G__817) {
+var G__1444 = arguments.length;
+switch (G__1444) {
 case 1:
 return puget.printer.cprint.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -1378,8 +1378,8 @@ puget.printer.cprint.cljs$lang$maxFixedArity = 2;
  * Pretty-prints a value to a colored string.
  */
 puget.printer.cprint_str = (function puget$printer$cprint_str(var_args){
-var G__820 = arguments.length;
-switch (G__820) {
+var G__1447 = arguments.length;
+switch (G__1447) {
 case 1:
 return puget.printer.cprint_str.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 

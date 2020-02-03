@@ -12,7 +12,7 @@ process.env.NODE_DISABLE_COLORS = true;
 var net  = require("net");
 var vm   = require("vm");
 var dom  = require("domain").create();
-var PORT = 55958;
+var PORT = 55073;
 var repl = null;
 
 try {

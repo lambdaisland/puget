@@ -84,7 +84,6 @@
     unknown value and is expected to return a formatting document representing
     it.
   "
-  ;(:require-macros [puget.macros :refer [current-ns]])
   (:require
     [arrangement.core :as order]
     [clojure.string :as str]
@@ -93,7 +92,12 @@
     [puget.color :as color]
     [puget.color.ansi]
     [puget.color.html]
-    [puget.dispatch :as dispatch]))
+    [puget.dispatch :as dispatch]
+    #?(:cljs
+       [cljs-time.coerce
+        :refer [from-date]]
+       [cljs-time.format :as format
+        :refer [formatter unparse]]))
 
 (defn get-type-name
   "Get the type of the given object as a string. For Clojure, gets the name of
@@ -117,13 +121,8 @@
 (defn to-hex-string
   "Returns a hex representation of input-string"
   [input-string]
-  (let [transformed-string #?(:clj (Integer/toHexString input-string)
-                              :cljs (.toString input-string 16))]
-    (case (count transformed-string)
-      0 "00"
-      1 (str "0" transformed-string)
-      (subs transformed-string (- (count transformed-string) 2) (count transformed-string)))))
-        
+  #?(:clj (Integer/toHexString input-string)
+     :cljs (.toString input-string 16)))       
 
 
 ;; ## Control Vars
@@ -234,7 +233,7 @@
   ([printer value repr]
    (format-unknown printer value (get-type-name value) repr))
   ([printer value tag repr]
-   (let [sys-id (to-hex-string (hash value))]
+   (let [sys-id (to-hex-string (hash value))] ;; We have to change this because the old method was System/identityHashCode3
      [:span
       (color/document printer :class-delimiter "#<")
       (color/document printer :class-name tag)
@@ -298,12 +297,14 @@
 (def java-handlers
   "Map of print handlers for Java types. This supports syntax for regular
   expressions, dates, UUIDs, and futures."
-  {:a;java.lang.Class
+  {java.lang.Class  ;; I don't know what to do here... yet!
    (fn class-handler
      [printer value]
      (format-unknown printer value "Class" (.getName ^Class value)))
 
-   :b;java.util.concurrent.Future
+   
+
+   java.util.concurrent.Future ;; I don't know what to do here... yet!
    (fn future-handler
      [printer value]
      (let [doc (if (future-done? value)
@@ -311,27 +312,34 @@
                  (color/document printer :nil "pending"))]
        (format-unknown printer value "Future" doc)))
 
-   :c;java.util.Date
+   #?(:clj java.util.Date
+      :cljs js/Date)
    (tagged-handler
      'inst
-     #(-> "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00"
-          (java.text.SimpleDateFormat.)
-          (doto (.setTimeZone (java.util.TimeZone/getTimeZone "GMT")))
-          (.format ^java.util.Date %)))
+     #?(:cjs #(-> "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00"
+                  (java.text.SimpleDateFormat.)
+                  (doto (.setTimeZone (java.util.TimeZone/getTimeZone "GMT")))
+                  (.format ^java.util.Date %))
+        :cljs (fn [x] ->
+                (let [dt (from-date x)]
+                  (unparse (formatter "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00") dt)))))
+     
 
-   :d;java.util.UUID
+   #?(:clj java.util.UUID
+      :cljs uuid)
    (tagged-handler 'uuid str)})
 
 
 (def clojure-handlers
   "Map of print handlers for 'primary' Clojure types. These should take
   precedence over the handlers in `clojure-interface-handlers`."
-  {clojure.lang.Atom
+  {#?(:clj clojure.lang.Atom
+      :cljs atom)
    (fn atom-handler
      [printer value]
      (format-unknown printer value "Atom" (format-doc printer @value)))
 
-   clojure.lang.Delay
+   clojure.lang.Delay ;; I don't know what to do here... yet!
    (fn delay-handler
      [printer value]
      (let [doc (if (realized? value)
@@ -339,7 +347,7 @@
                  (color/document printer :nil "pending"))]
        (format-unknown printer value "Delay" doc)))
 
-   clojure.lang.ISeq
+   clojure.lang.ISeq ;; I don't know what to do here... yet!
    (fn iseq-handler
      [printer value]
      (fv/visit-seq printer value))})

@@ -21,14 +21,14 @@ return ["\u001B","[",cljs.core.str.cljs$core$IFn$_invoke$arity$1(codes__$2),"m"]
  */
 puget.color.ansi.escape = (function puget$color$ansi$escape(var_args){
 var args__4736__auto__ = [];
-var len__4730__auto___1311 = arguments.length;
-var i__4731__auto___1312 = (0);
+var len__4730__auto___1312 = arguments.length;
+var i__4731__auto___1313 = (0);
 while(true){
-if((i__4731__auto___1312 < len__4730__auto___1311)){
-args__4736__auto__.push((arguments[i__4731__auto___1312]));
+if((i__4731__auto___1313 < len__4730__auto___1312)){
+args__4736__auto__.push((arguments[i__4731__auto___1313]));
 
-var G__1313 = (i__4731__auto___1312 + (1));
-i__4731__auto___1312 = G__1313;
+var G__1314 = (i__4731__auto___1313 + (1));
+i__4731__auto___1313 = G__1314;
 continue;
 } else {
 }
@@ -46,9 +46,9 @@ return puget.color.ansi.esc.call(null,codes);
 puget.color.ansi.escape.cljs$lang$maxFixedArity = (0);
 
 /** @this {Function} */
-puget.color.ansi.escape.cljs$lang$applyTo = (function (seq1310){
+puget.color.ansi.escape.cljs$lang$applyTo = (function (seq1311){
 var self__4718__auto__ = this;
-return self__4718__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq1310));
+return self__4718__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq1311));
 });
 
 /**
@@ -57,14 +57,14 @@ return self__4718__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.cal
  */
 puget.color.ansi.sgr = (function puget$color$ansi$sgr(var_args){
 var args__4736__auto__ = [];
-var len__4730__auto___1316 = arguments.length;
-var i__4731__auto___1317 = (0);
+var len__4730__auto___1317 = arguments.length;
+var i__4731__auto___1318 = (0);
 while(true){
-if((i__4731__auto___1317 < len__4730__auto___1316)){
-args__4736__auto__.push((arguments[i__4731__auto___1317]));
+if((i__4731__auto___1318 < len__4730__auto___1317)){
+args__4736__auto__.push((arguments[i__4731__auto___1318]));
 
-var G__1318 = (i__4731__auto___1317 + (1));
-i__4731__auto___1317 = G__1318;
+var G__1319 = (i__4731__auto___1318 + (1));
+i__4731__auto___1318 = G__1319;
 continue;
 } else {
 }
@@ -82,11 +82,11 @@ return [puget.color.ansi.esc.call(null,codes),cljs.core.str.cljs$core$IFn$_invok
 puget.color.ansi.sgr.cljs$lang$maxFixedArity = (1);
 
 /** @this {Function} */
-puget.color.ansi.sgr.cljs$lang$applyTo = (function (seq1314){
-var G__1315 = cljs.core.first.call(null,seq1314);
-var seq1314__$1 = cljs.core.next.call(null,seq1314);
+puget.color.ansi.sgr.cljs$lang$applyTo = (function (seq1315){
+var G__1316 = cljs.core.first.call(null,seq1315);
+var seq1315__$1 = cljs.core.next.call(null,seq1315);
 var self__4717__auto__ = this;
-return self__4717__auto__.cljs$core$IFn$_invoke$arity$variadic(G__1315,seq1314__$1);
+return self__4717__auto__.cljs$core$IFn$_invoke$arity$variadic(G__1316,seq1315__$1);
 });
 
 /**

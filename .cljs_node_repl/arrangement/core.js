@@ -18,8 +18,8 @@ var p = cljs.core.nth.call(null,arrangement.core.type_predicates,i);
 if(cljs.core.truth_(p.call(null,x))){
 return i;
 } else {
-var G__1336 = (i + (1));
-i = G__1336;
+var G__1337 = (i + (1));
+i = G__1337;
 continue;
 }
 } else {
@@ -62,10 +62,10 @@ var x = cljs.core.first.call(null,xs__$1);
 var y = cljs.core.first.call(null,ys__$1);
 var o = arrangement.core.rank.call(null,x,y);
 if((o === (0))){
-var G__1337 = cljs.core.next.call(null,xs__$1);
-var G__1338 = cljs.core.next.call(null,ys__$1);
-xs__$1 = G__1337;
-ys__$1 = G__1338;
+var G__1338 = cljs.core.next.call(null,xs__$1);
+var G__1339 = cljs.core.next.call(null,ys__$1);
+xs__$1 = G__1338;
+ys__$1 = G__1339;
 continue;
 } else {
 return o;

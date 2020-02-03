@@ -10,22 +10,22 @@ goog.require('goog.string');
  *   dispatchers in the sequence.
  */
 puget.dispatch.chained_lookup = (function puget$dispatch$chained_lookup(var_args){
-var G__1212 = arguments.length;
-switch (G__1212) {
+var G__1213 = arguments.length;
+switch (G__1213) {
 case 1:
 return puget.dispatch.chained_lookup.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
 break;
 default:
 var args_arr__4751__auto__ = [];
-var len__4730__auto___1214 = arguments.length;
-var i__4731__auto___1215 = (0);
+var len__4730__auto___1215 = arguments.length;
+var i__4731__auto___1216 = (0);
 while(true){
-if((i__4731__auto___1215 < len__4730__auto___1214)){
-args_arr__4751__auto__.push((arguments[i__4731__auto___1215]));
+if((i__4731__auto___1216 < len__4730__auto___1215)){
+args_arr__4751__auto__.push((arguments[i__4731__auto___1216]));
 
-var G__1216 = (i__4731__auto___1215 + (1));
-i__4731__auto___1215 = G__1216;
+var G__1217 = (i__4731__auto___1216 + (1));
+i__4731__auto___1216 = G__1217;
 continue;
 } else {
 }
@@ -57,8 +57,8 @@ return cljs.core.first.call(null,candidates);
 return ((function (candidates,no_chain_lookup_provided_message){
 return (function puget$dispatch$lookup(t){
 return cljs.core.some.call(null,((function (candidates,no_chain_lookup_provided_message){
-return (function (p1__1207_SHARP_){
-return p1__1207_SHARP_.call(null,t);
+return (function (p1__1208_SHARP_){
+return p1__1208_SHARP_.call(null,t);
 });})(candidates,no_chain_lookup_provided_message))
 ,candidates);
 });
@@ -71,13 +71,13 @@ return puget.dispatch.chained_lookup.call(null,cljs.core.list_STAR_.call(null,a,
 });
 
 /** @this {Function} */
-puget.dispatch.chained_lookup.cljs$lang$applyTo = (function (seq1209){
-var G__1210 = cljs.core.first.call(null,seq1209);
-var seq1209__$1 = cljs.core.next.call(null,seq1209);
-var G__1211 = cljs.core.first.call(null,seq1209__$1);
-var seq1209__$2 = cljs.core.next.call(null,seq1209__$1);
+puget.dispatch.chained_lookup.cljs$lang$applyTo = (function (seq1210){
+var G__1211 = cljs.core.first.call(null,seq1210);
+var seq1210__$1 = cljs.core.next.call(null,seq1210);
+var G__1212 = cljs.core.first.call(null,seq1210__$1);
+var seq1210__$2 = cljs.core.next.call(null,seq1210__$1);
 var self__4717__auto__ = this;
-return self__4717__auto__.cljs$core$IFn$_invoke$arity$variadic(G__1210,G__1211,seq1209__$2);
+return self__4717__auto__.cljs$core$IFn$_invoke$arity$variadic(G__1211,G__1212,seq1210__$2);
 });
 
 puget.dispatch.chained_lookup.cljs$lang$maxFixedArity = (2);
@@ -119,11 +119,11 @@ return dispatch.call(null,cljs.core.symbol.call(null,t.getName()));
  *   excluding the `java.lang.Object` base class.
  */
 puget.dispatch.lineage = (function puget$dispatch$lineage(cls){
-return cljs.core.take_while.call(null,(function (p1__1217_SHARP_){
-return (((!((p1__1217_SHARP_ == null)))) && (cljs.core.not_EQ_.call(null,puget.dispatch.Object,p1__1217_SHARP_)));
-}),cljs.core.iterate.call(null,(function (p1__1218_SHARP_){
-if(cljs.core.truth_(puget.dispatch.class_QMARK_.call(null,p1__1218_SHARP_))){
-return p1__1218_SHARP_.getSuperclass();
+return cljs.core.take_while.call(null,(function (p1__1218_SHARP_){
+return (((!((p1__1218_SHARP_ == null)))) && (cljs.core.not_EQ_.call(null,puget.dispatch.Object,p1__1218_SHARP_)));
+}),cljs.core.iterate.call(null,(function (p1__1219_SHARP_){
+if(cljs.core.truth_(puget.dispatch.class_QMARK_.call(null,p1__1219_SHARP_))){
+return p1__1219_SHARP_.getSuperclass();
 } else {
 return null;
 }
@@ -146,10 +146,10 @@ return interfaces;
 } else {
 var iface = cljs.core.first.call(null,queue);
 var implemented = get_interfaces.call(null,iface);
-var G__1219 = cljs.core.into.call(null,cljs.core.rest.call(null,queue),cljs.core.remove.call(null,interfaces,implemented));
-var G__1220 = cljs.core.conj.call(null,interfaces,iface);
-queue = G__1219;
-interfaces = G__1220;
+var G__1220 = cljs.core.into.call(null,cljs.core.rest.call(null,queue),cljs.core.remove.call(null,interfaces,implemented));
+var G__1221 = cljs.core.conj.call(null,interfaces,iface);
+queue = G__1220;
+interfaces = G__1221;
 continue;
 }
 break;
@@ -168,8 +168,8 @@ return or__4131__auto__;
 } else {
 var or__4131__auto____$1 = (function (){var candidates = cljs.core.remove.call(null,cljs.core.comp.call(null,cljs.core.nil_QMARK_,cljs.core.first),cljs.core.map.call(null,cljs.core.juxt.call(null,dispatch,cljs.core.identity),puget.dispatch.find_interfaces.call(null,t)));
 var wrong_number_of_candidates_message = "%d candidates found for interfaces on dispatch type %s: %s";
-var G__1222 = cljs.core.count.call(null,candidates);
-switch (G__1222) {
+var G__1223 = cljs.core.count.call(null,candidates);
+switch (G__1223) {
 case (0):
 return null;
 
