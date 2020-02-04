@@ -356,7 +356,7 @@
      [printer value]
      (format-unknown printer value "Atom" (format-doc printer @value)))
 
-   clojure.lang.Delay ;; I don't know what to do here... yet! Candidate Promesa
+   clojure.lang.Delay ;; I don't know what to do here... yet! Candidate Promesa 
    (fn delay-handler
      [printer value]
      (let [doc (if (realized? value)
@@ -372,13 +372,13 @@
 
 (def clojure-interface-handlers
   "Fallback print handlers for other Clojure interfaces."
-  {clojure.lang.IPending
+  {#?(:clj clojure.lang.IPending
    (fn pending-handler
      [printer value]
      (let [doc (if (realized? value)
                  (format-doc printer @value)
                  (color/document printer :nil "pending"))]
-       (format-unknown printer value doc)))
+       (format-unknown printer value doc))))
 
    clojure.lang.Fn
    (fn fn-handler
