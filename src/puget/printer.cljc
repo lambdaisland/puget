@@ -356,7 +356,7 @@
      [printer value]
      (format-unknown printer value "Atom" (format-doc printer @value)))
 
-   clojure.lang.Delay ;; I don't know what to do here... yet!
+   clojure.lang.Delay ;; I don't know what to do here... yet! Candidate Promesa
    (fn delay-handler
      [printer value]
      (let [doc (if (realized? value)
@@ -784,3 +784,5 @@
    (cprint-str value nil))
   ([value opts]
    (pprint-str value (assoc opts :print-color true))))
+
+
