@@ -85,19 +85,20 @@
     it.
   "
   (:require
-    [arrangement.core :as order]
-    [clojure.string :as str]
-    [fipp.engine :as fe]
-    [fipp.visit :as fv]
-    [puget.color :as color]
-    [puget.color.ansi]
-    [puget.color.html]
-    [puget.dispatch :as dispatch]
-    #?(:cljs
-       [cljs-time.coerce
-        :refer [from-date]]
-       [cljs-time.format :as format
-        :refer [formatter unparse]]))
+   [arrangement.core :as order]
+   [clojure.string :as str]
+   [fipp.engine :as fe]
+   [fipp.visit :as fv]
+   [puget.color :as color]
+   [puget.color.ansi]
+   [puget.color.html]
+   [puget.dispatch :as dispatch]
+   #?(:cljs
+      [cljs-time.coerce
+       :refer [from-date]]
+      [cljs-time.format
+       :refer [formatter unparse]]
+      [promesa.core :as p])))
 
 (defn get-type-name
   "Get the type of the given object as a string. For Clojure, gets the name of
@@ -117,12 +118,25 @@
   #?(:clj (class x)
      :cljs  (type x)))
 
+(defn get-identity-hashcode
+  "Get the hashcode for a given object o"
+  [o]
+  #?(:clj (System/identityHashCode o)
+     :cljs (hash o)))
+
 
 (defn to-hex-string
   "Returns a hex representation of input-string"
   [input-string]
   #?(:clj (Integer/toHexString input-string)
-     :cljs (.toString input-string 16)))       
+     :cljs (.toString input-string 16)))
+
+(defn is-resolved-multi
+  "Verify if a promise is resolved"
+  [promise]
+  #?(:clj (future-done? promise)
+     :cljs (promesa.core/resolved? promise)))
+
 
 
 ;; ## Control Vars
@@ -142,7 +156,7 @@
     :delimiter [:bold :red]
     :tag       [:red]
 
-    ; primitive values
+                                        ; primitive values
     :nil       [:bold :black]
     :boolean   [:green]
     :number    [:cyan]
@@ -151,7 +165,7 @@
     :keyword   [:bold :yellow]
     :symbol    nil
 
-    ; special types
+                                        ; special types
     :function-symbol [:bold :blue]
     :class-delimiter [:blue]
     :class-name      [:bold :blue]}})
@@ -233,7 +247,7 @@
   ([printer value repr]
    (format-unknown printer value (get-type-name value) repr))
   ([printer value tag repr]
-   (let [sys-id (to-hex-string (hash value))] ;; We have to change this because the old method was System/identityHashCode3
+   (let [sys-id (to-hex-string (get-identity-hashcode value))] ;; We have to change this because the old method was System/identityHashCode
      [:span
       (color/document printer :class-delimiter "#<")
       (color/document printer :class-name tag)
@@ -297,17 +311,19 @@
 (def java-handlers
   "Map of print handlers for Java types. This supports syntax for regular
   expressions, dates, UUIDs, and futures."
-  {java.lang.Class  ;; I don't know what to do here... yet!
+  {#?(:clj java.lang.Class  ;; I'm using object object from js/Object but I'm not 100% sure here
+      :cljs js/Object)
    (fn class-handler
      [printer value]
-     (format-unknown printer value "Class" (.getName ^Class value)))
+     (format-unknown printer value "Class" (get-type-name value)))
 
    
 
-   java.util.concurrent.Future ;; I don't know what to do here... yet!
+   #?(:clj java.util.concurrent.Future
+      :cljs js/Promise)      ;; Same as before. I am not 100% sure about this
    (fn future-handler
      [printer value]
-     (let [doc (if (future-done? value)
+     (let [doc (if (is-resolved-multi value)
                  (format-doc printer @value)
                  (color/document printer :nil "pending"))]
        (format-unknown printer value "Future" doc)))
@@ -315,15 +331,16 @@
    #?(:clj java.util.Date
       :cljs js/Date)
    (tagged-handler
-     'inst
-     #?(:cjs #(-> "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00"
-                  (java.text.SimpleDateFormat.)
-                  (doto (.setTimeZone (java.util.TimeZone/getTimeZone "GMT")))
-                  (.format ^java.util.Date %))
-        :cljs (fn [x] ->
-                (let [dt (from-date x)]
-                  (unparse (formatter "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00") dt)))))
-     
+    'inst
+    #?(:cjs #(-> "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00"
+                 (java.text.SimpleDateFormat.)
+                 (doto (.setTimeZone (java.util.TimeZone/getTimeZone "GMT")))
+                 (.format ^java.util.Date %))
+       :cljs (fn [x] ->
+               (let [dt (from-date x)
+                     date-formatter (cljs-time.format/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00")]
+                 (cljs-time.format/unparse date-formatter dt)))))
+   
 
    #?(:clj java.util.UUID
       :cljs uuid)
@@ -384,20 +401,20 @@
   lookups. Provides a similar experience as the standard Clojure
   pretty-printer."
   (dispatch/chained-lookup
-    (dispatch/inheritance-lookup java-handlers)
-    (dispatch/inheritance-lookup clojure-handlers)
-    (dispatch/inheritance-lookup clojure-interface-handlers)))
+   (dispatch/inheritance-lookup java-handlers)
+   (dispatch/inheritance-lookup clojure-handlers)
+   (dispatch/inheritance-lookup clojure-interface-handlers)))
 
 
 
 ;; ## Canonical Printer Implementation
 
 (defrecord CanonicalPrinter
-  [print-handlers]
+    [print-handlers]
 
   fv/IVisitor
 
-  ; Primitive Types
+                                        ; Primitive Types
 
   (visit-nil
     [this]
@@ -428,7 +445,7 @@
     (str value))
 
 
-  ; Collection Types
+                                        ; Collection Types
 
   (visit-seq
     [this value]
@@ -462,30 +479,30 @@
       "{}"))
 
 
-  ; Clojure Types
+                                        ; Clojure Types
 
   (visit-meta
     [this metadata value]
-    ; Metadata is not printed for canonical rendering.
+                                        ; Metadata is not printed for canonical rendering.
     (format-doc* this value))
 
   (visit-var
     [this value]
-    ; Defer to unknown, cover with handler.
+                                        ; Defer to unknown, cover with handler.
     (fv/visit-unknown this value))
 
   (visit-pattern
     [this value]
-    ; Defer to unknown, cover with handler.
+                                        ; Defer to unknown, cover with handler.
     (fv/visit-unknown this value))
 
   (visit-record
     [this value]
-    ; Defer to unknown, cover with handler.
+                                        ; Defer to unknown, cover with handler.
     (fv/visit-unknown this value))
 
 
-  ; Special Types
+                                        ; Special Types
 
   (visit-tagged
     [this value]
@@ -494,9 +511,9 @@
   (visit-unknown
     [this value]
     (let [not-defined-representation-message (str "No defined representation for "
-                                              (get-type value)
-                                              ": "
-                                              (pr-str value))]
+                                                  (get-type value)
+                                                  ": "
+                                                  (pr-str value))]
       #?(:clj (throw (IllegalArgumentException. not-defined-representation-message))
          :cljs (throw not-defined-representation-message)))))
 
@@ -511,7 +528,7 @@
           :width 0)))
 
 
-; Remove automatic constructor function.
+;; Remove automatic constructor function.
 #?(:clj (ns-unmap *ns* '->CanonicalPrinter))
 
 
@@ -520,22 +537,22 @@
 ;; ## Pretty Printer Implementation
 
 (defrecord PrettyPrinter
-  [width
-   print-meta
-   sort-keys
-   map-delimiter
-   map-coll-separator
-   namespace-maps
-   seq-limit
-   print-color
-   color-markup
-   color-scheme
-   print-handlers
-   print-fallback]
+    [width
+     print-meta
+     sort-keys
+     map-delimiter
+     map-coll-separator
+     namespace-maps
+     seq-limit
+     print-color
+     color-markup
+     color-scheme
+     print-handlers
+     print-fallback]
 
   fv/IVisitor
 
-  ; Primitive Types
+                                        ; Primitive Types
 
   (visit-nil
     [this]
@@ -566,7 +583,7 @@
     (color/document this :symbol (str value)))
 
 
-  ; Collection Types
+                                        ; Collection Types
 
   (visit-seq
     [this value]
@@ -632,7 +649,7 @@
       (color/document this :delimiter "{}")))
 
 
-  ; Clojure Types
+                                        ; Clojure Types
 
   (visit-meta
     [this metadata value]
@@ -657,12 +674,12 @@
   (visit-record
     [this value]
     (fv/visit-tagged
-      this
-      (tagged-literal (symbol (get-type-name value))
-                      (into {} value))))
+     this
+     (tagged-literal (symbol (get-type-name value))
+                     (into {} value))))
 
 
-  ; Special Types
+                                        ; Special Types
 
   (visit-tagged
     [this value]
@@ -688,13 +705,13 @@
                       (pr-str value))))
          :cljs
          (throw (str "No defined representation for " (get-type value) ": "
-                      (pr-str value))))
+                     (pr-str value))))
 
       (if (ifn? print-fallback)
         (print-fallback this value)
         #?(:clj (throw (IllegalStateException.
-                   (str "Unsupported value for print-fallback: "
-                        (pr-str print-fallback))))
+                        (str "Unsupported value for print-fallback: "
+                             (pr-str print-fallback))))
            :cljs (throw (str "Unsupported value for print-fallback: "
                              (pr-str print-fallback))))))))
 
@@ -710,7 +727,7 @@
        (map->PrettyPrinter)))
 
 
-; Remove automatic constructor function.
+;; Remove automatic constructor function.
 #?(:clj (ns-unmap *ns* '->PrettyPrinter))
 
 
@@ -723,8 +740,8 @@
   [printer value]
   (binding [*print-meta* false]
     (fe/pprint-document
-      (format-doc printer value)
-      {:width (:width printer)})))
+     (format-doc printer value)
+     {:width (:width printer)})))
 
 
 (defn render-str
@@ -732,8 +749,8 @@
   ^String
   [printer value]
   (str/trim-newline
-    (with-out-str
-      (render-out printer value))))
+   (with-out-str
+     (render-out printer value))))
 
 
 (defn pprint

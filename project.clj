@@ -13,7 +13,7 @@
 
 
   :dependencies
-  [[org.clojure/clojure "1.10.0"]
+  [[org.clojure/clojure "1.10.1"]
    [org.clojure/clojurescript "1.10.520"
     :exclusions [[com.google.errorprone/error_prone_annotations]
                  [com.google.code.findbugs/jsr305]]]
@@ -21,6 +21,7 @@
    [lein-cljsbuild "1.1.7"]
    [mvxcvi/arrangement "1.2.0"]
    [fipp "0.6.21"]
+   [funcool/promesa "5.0.0"]
    [com.andrewmcveigh/cljs-time "0.5.2"]]
 
   :profiles {:dev {:plugins [[lein-difftest "2.0.0"]
