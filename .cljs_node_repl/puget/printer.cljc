@@ -97,8 +97,7 @@
       [cljs-time.coerce
        :refer [from-date]]
       [cljs-time.format
-       :refer [formatter unparse]]
-      [promesa.core :as p])))
+       :refer [formatter unparse]])))
 
 (defn get-type-name
   "Get the type of the given object as a string. For Clojure, gets the name of
@@ -135,7 +134,7 @@
   "Verify if a promise is resolved"
   [promise]
   #?(:clj (future-done? promise)
-     :cljs (promesa.core/resolved? promise)))
+     :cljs (js/Promise.resolved? promise)))
 
 
 
@@ -356,7 +355,8 @@
      [printer value]
      (format-unknown printer value "Atom" (format-doc printer @value)))
 
-   clojure.lang.Delay ;; I don't know what to do here... yet! Candidate Promesa 
+   #?(:clj clojure.lang.Delay
+      :cljs cljs.core/Delay)
    (fn delay-handler
      [printer value]
      (let [doc (if (realized? value)
@@ -364,7 +364,8 @@
                  (color/document printer :nil "pending"))]
        (format-unknown printer value "Delay" doc)))
 
-   clojure.lang.ISeq ;; I don't know what to do here... yet!
+   #?(:clj clojure.lang.ISeq
+      :cljs cljs.core.ISeq)
    (fn iseq-handler
      [printer value]
      (fv/visit-seq printer value))})
@@ -372,7 +373,8 @@
 
 (def clojure-interface-handlers
   "Fallback print handlers for other Clojure interfaces."
-  {clojure.lang.IPending
+  {#?(:clj clojure.lang.IPending
+      :cljs cljs.core.IPending)
    (fn pending-handler
      [printer value]
      (let [doc (if (realized? value)
@@ -380,7 +382,8 @@
                  (color/document printer :nil "pending"))]
        (format-unknown printer value doc)))
 
-   clojure.lang.Fn
+   #?(:clj clojure.lang.Fn
+      :cljs cljs.core.Fn)
    (fn fn-handler
      [printer value]
      (let [doc (let [[vname & tail] (-> (get-type-name value)

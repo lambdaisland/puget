@@ -46,7 +46,7 @@ return input_string.toString((16));
  * Verify if a promise is resolved
  */
 puget.printer.is_resolved_multi = (function puget$printer$is_resolved_multi(promise){
-return promesa.core.resolved_QMARK_(promise);
+return Promise.resolved_QMARK_(promise);
 });
 /**
  * Default options to use when constructing new printers.
@@ -350,19 +350,19 @@ return cljs_time.format.unparse.call(null,date_formatter,dt);
  */
 puget.printer.clojure_handlers = cljs.core.PersistentArrayMap.createAsIfByAssoc([cljs.core.atom,(function puget$printer$atom_handler(printer,value){
 return puget.printer.format_unknown.call(null,printer,value,"Atom",puget.printer.format_doc.call(null,printer,cljs.core.deref.call(null,value)));
-}),clojure.lang.Delay,(function puget$printer$delay_handler(printer,value){
+}),cljs.core.Delay,(function puget$printer$delay_handler(printer,value){
 var doc = ((cljs.core.realized_QMARK_.call(null,value))?puget.printer.format_doc.call(null,printer,cljs.core.deref.call(null,value)):puget.color.document.call(null,printer,new cljs.core.Keyword(null,"nil","nil",99600501),"pending"));
 return puget.printer.format_unknown.call(null,printer,value,"Delay",doc);
-}),clojure.lang.ISeq,(function puget$printer$iseq_handler(printer,value){
+}),cljs.core.ISeq,(function puget$printer$iseq_handler(printer,value){
 return fipp.visit.visit_seq.call(null,printer,value);
 })]);
 /**
  * Fallback print handlers for other Clojure interfaces.
  */
-puget.printer.clojure_interface_handlers = cljs.core.PersistentArrayMap.createAsIfByAssoc([clojure.lang.IPending,(function puget$printer$pending_handler(printer,value){
+puget.printer.clojure_interface_handlers = cljs.core.PersistentArrayMap.createAsIfByAssoc([cljs.core.IPending,(function puget$printer$pending_handler(printer,value){
 var doc = ((cljs.core.realized_QMARK_.call(null,value))?puget.printer.format_doc.call(null,printer,cljs.core.deref.call(null,value)):puget.color.document.call(null,printer,new cljs.core.Keyword(null,"nil","nil",99600501),"pending"));
 return puget.printer.format_unknown.call(null,printer,value,doc);
-}),clojure.lang.Fn,(function puget$printer$fn_handler(printer,value){
+}),cljs.core.Fn,(function puget$printer$fn_handler(printer,value){
 var doc = (function (){var vec__743 = clojure.string.split.call(null,clojure.string.replace_first.call(null,puget.printer.get_type_name.call(null,value),"$","/"),/\$/);
 var seq__744 = cljs.core.seq.call(null,vec__743);
 var first__745 = cljs.core.first.call(null,seq__744);
