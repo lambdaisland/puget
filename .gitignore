@@ -3,10 +3,12 @@
 .cljs_node_repl
 node_modules
 out
-bin
 .lein-*
 .nrepl-port
 pom.xml
 pom.xml.asc
 *.jar
 *.class
+.cljs_node_repl
+.cpcache
+.#*
