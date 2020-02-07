@@ -84,20 +84,17 @@
     unknown value and is expected to return a formatting document representing
     it.
   "
-  (:require
-   [arrangement.core :as order]
-   [clojure.string :as str]
-   [fipp.engine :as fe]
-   [fipp.visit :as fv]
-   [puget.color :as color]
-   [puget.color.ansi]
-   [puget.color.html]
-   [puget.dispatch :as dispatch]
-   #?(:cljs
-      [cljs-time.coerce
-       :refer [from-date]]
-      [cljs-time.format
-       :refer [formatter unparse]])))
+  (:require [arrangement.core :as order]
+            [clojure.string :as str]
+            [fipp.engine :as fe]
+            [fipp.visit :as fv]
+            [puget.color :as color]
+            [puget.color.ansi]
+            [puget.color.html]
+            [puget.dispatch :as dispatch]
+            #?@(:cljs
+                [[cljs-time.coerce :refer [from-date]]
+                 [cljs-time.format :refer [formatter unparse]]])))
 
 (defn get-type-name
   "Get the type of the given object as a string. For Clojure, gets the name of
@@ -261,7 +258,8 @@
   "Formats a document without considering metadata."
   [printer value]
   (let [lookup (:print-handlers printer)
-        handler (and lookup (lookup (get-type value)))]
+        handler (and lookup (lookup #?(:clj (get-type value)
+                                       :cljs value)))]
     (if handler
       (handler printer value)
       (fv/visit* printer value))))
@@ -307,56 +305,58 @@
     (format-doc printer (tagged-literal tag (value-fn value)))))
 
 
-(def java-handlers
-  "Map of print handlers for Java types. This supports syntax for regular
+(def platform-handlers
+  "Map of print handlers for Java/JavaScript types. This supports syntax for regular
   expressions, dates, UUIDs, and futures."
-  {#?(:clj java.lang.Class  ;; I'm using object object from js/Object but I'm not 100% sure here
-      :cljs js/Object)
-   (fn class-handler
-     [printer value]
-     (format-unknown printer value "Class" (get-type-name value)))
+  (merge
+   {#?(:clj java.util.Date
+       :cljs inst?)
+    (tagged-handler
+     'inst
+     #?(:clj #(-> "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00"
+                  (java.text.SimpleDateFormat.)
+                  (doto (.setTimeZone (java.util.TimeZone/getTimeZone "GMT")))
+                  (.format ^java.util.Date %))
+        :cljs (fn [x]
+                (let [dt (from-date x)
+                      date-formatter (cljs-time.format/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00")]
+                  (cljs-time.format/unparse date-formatter dt)))))
 
-   
 
-   #?(:clj java.util.concurrent.Future
-      :cljs js/Promise)      ;; Same as before. I am not 100% sure about this
-   (fn future-handler
-     [printer value]
-     (let [doc (if (is-resolved-multi value)
-                 (format-doc printer @value)
-                 (color/document printer :nil "pending"))]
-       (format-unknown printer value "Future" doc)))
+    #?(:clj java.util.UUID
+       :cljs uuid?)
+    (tagged-handler 'uuid str)}
 
-   #?(:clj java.util.Date
-      :cljs js/Date)
-   (tagged-handler
-    'inst
-    #?(:cjs #(-> "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00"
-                 (java.text.SimpleDateFormat.)
-                 (doto (.setTimeZone (java.util.TimeZone/getTimeZone "GMT")))
-                 (.format ^java.util.Date %))
-       :cljs (fn [x] ->
-               (let [dt (from-date x)
-                     date-formatter (cljs-time.format/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00")]
-                 (cljs-time.format/unparse date-formatter dt)))))
-   
+   #?(:clj
+      {java.lang.Class
+       (fn class-handler
+         [printer value]
+         (format-unknown printer value "Class" (get-type-name value)))
 
-   #?(:clj java.util.UUID
-      :cljs uuid)
-   (tagged-handler 'uuid str)})
+
+
+       java.util.concurrent.Future
+       (fn future-handler
+         [printer value]
+         (let [doc (if (is-resolved-multi value)
+                     (format-doc printer @value)
+                     (color/document printer :nil "pending"))]
+           (format-unknown printer value "Future" doc)))
+
+       })))
 
 
 (def clojure-handlers
   "Map of print handlers for 'primary' Clojure types. These should take
   precedence over the handlers in `clojure-interface-handlers`."
   {#?(:clj clojure.lang.Atom
-      :cljs atom)
+      :cljs #(implements? IAtom %))
    (fn atom-handler
      [printer value]
      (format-unknown printer value "Atom" (format-doc printer @value)))
 
    #?(:clj clojure.lang.Delay
-      :cljs cljs.core/Delay)
+      :cljs #(implements? Delay %))
    (fn delay-handler
      [printer value]
      (let [doc (if (realized? value)
@@ -365,7 +365,7 @@
        (format-unknown printer value "Delay" doc)))
 
    #?(:clj clojure.lang.ISeq
-      :cljs cljs.core.ISeq)
+      :cljs seq?)
    (fn iseq-handler
      [printer value]
      (fv/visit-seq printer value))})
@@ -374,7 +374,7 @@
 (def clojure-interface-handlers
   "Fallback print handlers for other Clojure interfaces."
   {#?(:clj clojure.lang.IPending
-      :cljs cljs.core.IPending)
+      :cljs #(implements? IPending %))
    (fn pending-handler
      [printer value]
      (let [doc (if (realized? value)
@@ -383,7 +383,7 @@
        (format-unknown printer value doc)))
 
    #?(:clj clojure.lang.Fn
-      :cljs cljs.core.Fn)
+      :cljs fn?)
    (fn fn-handler
      [printer value]
      (let [doc (let [[vname & tail] (-> (get-type-name value)
@@ -398,16 +398,18 @@
                    vname))]
        (format-unknown printer value "Fn" doc)))})
 
-
 (def common-handlers
   "Print handler dispatch combining Java and Clojure handlers with inheritance
   lookups. Provides a similar experience as the standard Clojure
   pretty-printer."
-  (dispatch/chained-lookup
-   (dispatch/inheritance-lookup java-handlers)
-   (dispatch/inheritance-lookup clojure-handlers)
-   (dispatch/inheritance-lookup clojure-interface-handlers)))
-
+  #?(:clj (dispatch/chained-lookup
+           (dispatch/inheritance-lookup platform-handlers)
+           (dispatch/inheritance-lookup clojure-handlers)
+           (dispatch/inheritance-lookup clojure-interface-handlers))
+     :cljs (dispatch/chained-lookup
+            (dispatch/predicate-lookup platform-handlers)
+            (dispatch/predicate-lookup clojure-handlers)
+            (dispatch/predicate-lookup clojure-interface-handlers))))
 
 
 ;; ## Canonical Printer Implementation
@@ -740,11 +742,14 @@
 
 (defn render-out
   "Prints a value using the given printer."
-  [printer value]
-  (binding [*print-meta* false]
-    (fe/pprint-document
-     (format-doc printer value)
-     {:width (:width printer)})))
+  ([printer value]
+   (render-out printer value nil))
+  ([printer value opts]
+   (binding [*print-meta* false]
+     (fe/pprint-document
+      (format-doc printer value)
+      (merge {:width (:width printer)}
+             opts)))))
 
 
 (defn render-str
@@ -762,7 +767,7 @@
   ([value]
    (pprint value nil))
   ([value opts]
-   (render-out (pretty-printer opts) value)))
+   (render-out (pretty-printer opts) value opts)))
 
 
 (defn pprint-str
@@ -787,5 +792,3 @@
    (cprint-str value nil))
   ([value opts]
    (pprint-str value (assoc opts :print-color true))))
-
-
