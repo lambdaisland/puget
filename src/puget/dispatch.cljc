@@ -48,68 +48,72 @@
             v))))))
 
 
-;; ## Type Dispatch
+#?(:cljs
+   (defn predicate-lookup
+     "Look up a handler for a value based on a map from predicate to handler"
+     [types]
+     (fn lookup [value]
+       (some (fn [[pred? handler]]
+               (when (pred? value)
+                 handler))
+             types))))
 
-(defn symbolic-lookup
-  "Builds a dispatcher which looks up a type by checking the underlying lookup
+;; ## Type Dispatch (Clojure)
+
+#?(:clj
+   (defn symbolic-lookup
+     "Builds a dispatcher which looks up a type by checking the underlying lookup
   using the type's _symbolic_ name, rather than the class value itself. This is
   useful for checking configuration that must be created in situations where the
   classes themselves may not be loaded yet."
-  [dispatch]
-  (fn lookup
-    [^Class t]
-    (dispatch (symbol (.getName t)))))
+     [dispatch]
+     (fn lookup
+       [^Class t]
+       (dispatch (symbol (.getName t))))))
 
-
-(defn- lineage
-  "Returns the ancestry of the given class, starting with the class and
+#?(:clj
+   (defn- lineage
+     "Returns the ancestry of the given class, starting with the class and
   excluding the `java.lang.Object` base class."
-  [cls]
-  (take-while #(and (some? %) (not= Object %))
-              (iterate #(when (class? %) (.getSuperclass ^Class %)) cls)))
+     [cls]
+     (take-while #(and (some? %) (not= Object %))
+                 (iterate #(when (class? %) (.getSuperclass ^Class %)) cls))))
 
-
-(defn- find-interfaces
-  "Resolves all of the interfaces implemented by a class, both direct (through
+#?(:clj
+   (defn- find-interfaces
+     "Resolves all of the interfaces implemented by a class, both direct (through
   class ancestors) and indirect (through other interfaces)."
-  [cls]
-  (let [get-interfaces (fn [^Class c] (.getInterfaces c))
-        direct-interfaces (mapcat get-interfaces (lineage cls))]
-    (loop [queue (vec direct-interfaces)
-           interfaces #{}]
-      (if (empty? queue)
-        interfaces
-        (let [^Class iface (first queue)
-              implemented (get-interfaces iface)]
-          (recur (into (rest queue)
-                       (remove interfaces implemented))
-                 (conj interfaces iface)))))))
+     [cls]
+     (let [get-interfaces (fn [^Class c] (.getInterfaces c))
+           direct-interfaces (mapcat get-interfaces (lineage cls))]
+       (loop [queue (vec direct-interfaces)
+              interfaces #{}]
+         (if (empty? queue)
+           interfaces
+           (let [^Class iface (first queue)
+                 implemented (get-interfaces iface)]
+             (recur (into (rest queue)
+                          (remove interfaces implemented))
+                    (conj interfaces iface))))))))
 
-(defn inheritance-lookup
-  "Builds a dispatcher which looks up a type by looking up the type itself,
+#?(:clj
+   (defn inheritance-lookup
+     "Builds a dispatcher which looks up a type by looking up the type itself,
   then attempting to look up its ancestor classes, implemented interfaces, and
   finally `java.lang.Object`."
-  [dispatch]
-  (fn lookup
-    [t]
-    (or
-                                        ; Look up base class and ancestors up to the base class.
-     (some dispatch (lineage t))
-
-                                        ; Look up interfaces and collect candidates.
-     (let [candidates (remove (comp nil? first)
-                              (map (juxt dispatch identity)
-                                   (find-interfaces t)))
-           wrong-number-of-candidates-message "%d candidates found for interfaces on dispatch type %s: %s"]
-       (case (count candidates)
-         0 nil
-         1 (ffirst candidates)
-         #?(:clj (throw RuntimeException.
-                        (format wrong-number-of-candidates-message
-                                (count candidates) t (str/join ", " (map second candidates))))
-            :cljs (throw (format wrong-number-of-candidates-message
-                                 (count candidates) t (str/join ", " (map second candidates)))))))
-
-                                        ; Look up Object base class.
-     #?(:clj (dispatch Object)
-        :cljs (dispatch js/Object)))))
+     [dispatch]
+     (fn lookup
+       [t]
+       (or
+        (some dispatch (lineage t))
+        (let [candidates (remove (comp nil? first)
+                                 (map (juxt dispatch identity)
+                                      (find-interfaces t)))
+              wrong-number-of-candidates-message "%d candidates found for interfaces on dispatch type %s: %s"]
+          (case (count candidates)
+            0 nil
+            1 (ffirst candidates)
+            (throw (RuntimeException.
+                    (format wrong-number-of-candidates-message
+                            (count candidates) t (str/join ", " (map second candidates)))))))
+        (dispatch Object)))))
