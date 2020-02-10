@@ -48,6 +48,8 @@
             v))))))
 
 
+;; Space for predicate-lookup. TypeScript support
+
 #?(:cljs
    (defn predicate-lookup
      "Look up a handler for a value based on a map from predicate to handler"

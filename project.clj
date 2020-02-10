@@ -16,14 +16,22 @@
   [[org.clojure/clojure "1.10.1"]
    [org.clojure/clojurescript "1.10.520"
     :exclusions [[com.google.errorprone/error_prone_annotations]
-                 [com.google.code.findbugs/jsr305]]]
-   ;[cider/piggieback "0.4.2"]
+                 [com.google.code.findbugs/jsr305]
+                 ]]
    [lein-cljsbuild "1.1.7"]
    [mvxcvi/arrangement "1.2.0"]
    [fipp "0.6.21"]
    [funcool/promesa "5.0.0"]
-   [com.andrewmcveigh/cljs-time "0.5.2"]]
-
+   [com.andrewmcveigh/cljs-time "0.5.2"]
+   [lambdaisland/kaocha-cljs "0.0-68"
+    :exclusions [[com.cognitect/transit-java]
+                 [org.clojure/java.classpath]
+                 [org.clojure/tools.reader]
+                 [com.cognitect/transit-clj]]]
+   [lambdaisland/kaocha "0.0-590"
+    :exclusions [[org.clojure/java.classpath]
+                 [org.clojure/tools.reader]]]]
+  
   :profiles {:dev {:plugins [[lein-difftest "2.0.0"]
                              [com.cemerick/clojurescript.test "0.3.3"]
                              [lein-cljsbuild "1.0.6"]]
