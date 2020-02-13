@@ -29,7 +29,7 @@
                  [org.clojure/tools.reader]
                  [com.cognitect/transit-clj]]]
    [lambdaisland/kaocha "0.0-590"
-    :exclusions [[org.clojure/java.classpath]
+    :exclusions [;;[org.clojure/java.classpath]
                  [org.clojure/tools.reader]]]]
   
   :profiles {:dev {:plugins [[lein-difftest "2.0.0"]
@@ -37,9 +37,9 @@
                              [lein-cljsbuild "1.0.6"]]
                    :aliases {"cleantest" ["do" "clean," "once," "test," "cljsbuild" "test"]
                              "jar" ["do" "clean," "once," "jar"]
-                             "deploy" ["do" "clean," "deploy" "clojars"]}}}
-
-;  :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
+                             "deploy" ["do" "clean," "deploy" "clojars"]
+                             "kaocha" ["with-profile" "+kaocha" "run" "-m" "kaocha.runner"]}}
+             :kaocha {:dependencies [[lambdaisland/kaocha "0.0-590"]]}}
 
   :cljsbuild {:builds
               {:test {:source-paths ["target/classes" "target/test-classes"]

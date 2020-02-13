@@ -343,7 +343,14 @@
                      (color/document printer :nil "pending"))]
            (format-unknown printer value "Future" doc)))
 
-       })))
+       })
+   
+   #?(:cljs
+      {object?
+       (tagged-handler
+        'object
+        (fn [x]
+          (js->clj x)))})))
 
 
 (def clojure-handlers
@@ -640,13 +647,15 @@
                            [:span
                             (format-doc this k)
                             (if (coll? v)
-                              map-coll-separator
-                              " ")
+                              ;; :map-coll-separator
+                              :inline
+                              " ") ;; Original value " "
                             (format-doc this v)])
                          kvs)
             map-doc [:group
                      (color/document this :delimiter "{")
                      [:align (interpose [:span map-delimiter :line] entries)]
+                     ;; [:align (interpose [:span map-delimiter :map-coll-separator] entries)]
                      (color/document this :delimiter "}")]]
         (if common-ns
           [:group (color/document this :tag (str "#:" common-ns)) :line map-doc]

@@ -48,7 +48,7 @@
             v))))))
 
 
-;; Space for predicate-lookup. TypeScript support
+;; Space for predicate-lookup. ClojureScript support
 
 #?(:cljs
    (defn predicate-lookup
