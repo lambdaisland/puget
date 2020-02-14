@@ -20,7 +20,7 @@
                  ]]
    [lein-cljsbuild "1.1.7"]
    [mvxcvi/arrangement "1.2.0"]
-   [fipp "0.6.21"]
+   [fipp "0.6.22"]
    [funcool/promesa "5.0.0"]
    [com.andrewmcveigh/cljs-time "0.5.2"]
    [lambdaisland/kaocha-cljs "0.0-68"

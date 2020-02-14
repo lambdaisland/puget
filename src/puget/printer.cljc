@@ -646,9 +646,8 @@
             entries (map (fn [[k v]]
                            [:span
                             (format-doc this k)
-                            (if (coll? v)
-                              ;; :map-coll-separator
-                              :inline
+                            (if (coll? v)                              
+                              map-coll-separator
                               " ") ;; Original value " "
                             (format-doc this v)])
                          kvs)
