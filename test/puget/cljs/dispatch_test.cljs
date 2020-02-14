@@ -2,8 +2,6 @@
   (:require [cljs.test :as t]
             [puget.dispatch :as dispatch]))
 
-(t/deftest true-test
-  (t/is (= :foo :foo)))
 
 (def type-handlers-map
   {inst? (fn [x] (js/Date.))

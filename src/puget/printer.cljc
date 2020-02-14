@@ -654,8 +654,7 @@
                          kvs)
             map-doc [:group
                      (color/document this :delimiter "{")
-                     [:align (interpose [:span map-delimiter :line] entries)]
-                     ;; [:align (interpose [:span map-delimiter :map-coll-separator] entries)]
+                     [:align (interpose [:span map-delimiter :line] entries)]     
                      (color/document this :delimiter "}")]]
         (if common-ns
           [:group (color/document this :tag (str "#:" common-ns)) :line map-doc]
