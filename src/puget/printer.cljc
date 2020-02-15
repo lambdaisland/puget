@@ -94,7 +94,8 @@
             [puget.dispatch :as dispatch]
             #?@(:cljs
                 [[cljs-time.coerce :refer [from-date]]
-                 [cljs-time.format :refer [formatter unparse]]])))
+                 [cljs-time.format :refer [formatter unparse]]
+                 [promesa.core :refer [resolved?]]])))
 
 (defn get-type-name
   "Get the type of the given object as a string. For Clojure, gets the name of
@@ -120,23 +121,20 @@
   #?(:clj (System/identityHashCode o)
      :cljs (hash o)))
 
-
 (defn to-hex-string
   "Returns a hex representation of input-string"
   [input-string]
   #?(:clj (Integer/toHexString input-string)
      :cljs (.toString input-string 16)))
 
-(defn is-resolved-multi
-  "Verify if a promise is resolved"
-  [promise]
-  #?(:clj (future-done? promise)
-     :cljs (js/Promise.resolved? promise)))
 
-
+#?(:clj
+   (defn is-resolved-multi
+     "Verify if a promise is resolved"
+     [promise]
+     (future-done? promise)))
 
 ;; ## Control Vars
-
 (def ^:dynamic *options*
   "Default options to use when constructing new printers."
   {:width 80
@@ -148,11 +146,11 @@
    :print-color false
    :color-markup :ansi
    :color-scheme
-   {; syntax elements
+   {;; syntax elements
     :delimiter [:bold :red]
     :tag       [:red]
 
-                                        ; primitive values
+    ;; primitive values
     :nil       [:bold :black]
     :boolean   [:green]
     :number    [:cyan]
@@ -161,11 +159,10 @@
     :keyword   [:bold :yellow]
     :symbol    nil
 
-                                        ; special types
+    ;; special types
     :function-symbol [:bold :blue]
     :class-delimiter [:blue]
     :class-name      [:bold :blue]}})
-
 
 (defn merge-options
   "Merges maps of printer options, taking care to combine the color scheme
@@ -174,7 +171,6 @@
   (let [colors (merge (:color-scheme a) (:color-scheme b))]
     (assoc (merge a b) :color-scheme colors)))
 
-
 (defmacro with-options
   "Executes the given expressions with a set of options merged into the current
   option map."
@@ -182,13 +178,11 @@
   `(binding [*options* (merge-options *options* ~opts)]
      ~@body))
 
-
 (defmacro with-color
   "Executes the given expressions with colored output enabled."
   [& body]
   `(with-options {:print-color true}
      ~@body))
-
 
 (defn color-text
   "Produces text colored according to the active color scheme. This is mostly
@@ -200,10 +194,7 @@
   ([options element text]
    (color/text options element text)))
 
-
-
 ;; ## Formatting Methods
-
 (defn- order-collection
   "Takes a sequence of entries and checks the mode to determine whether to sort
   them. Returns an appropriately ordered sequence."
@@ -235,7 +226,6 @@
                         e)))
                m)]))))
 
-
 (defn format-unknown
   "Renders common syntax doc for an unknown representation of a value."
   ([printer value]
@@ -243,7 +233,7 @@
   ([printer value repr]
    (format-unknown printer value (get-type-name value) repr))
   ([printer value tag repr]
-   (let [sys-id (to-hex-string (get-identity-hashcode value))] ;; We have to change this because the old method was System/identityHashCode
+   (let [sys-id (to-hex-string (get-identity-hashcode value))]
      [:span
       (color/document printer :class-delimiter "#<")
       (color/document printer :class-name tag)
@@ -252,7 +242,6 @@
       (when (not= repr (str tag "@" sys-id))
         (list " " repr))
       (color/document printer :class-delimiter ">")])))
-
 
 (defn format-doc*
   "Formats a document without considering metadata."
@@ -264,7 +253,6 @@
       (handler printer value)
       (fv/visit* printer value))))
 
-
 (defn format-doc
   "Recursively renders a print document for the given value."
   [printer value]
@@ -272,21 +260,16 @@
     (fv/visit-meta printer metadata value)
     (format-doc* printer value)))
 
-
-
 ;; ## Type Handlers
-
 (defn pr-handler
   "Print handler which renders the value with `pr-str`."
   [printer value]
   (pr-str value))
 
-
 (defn unknown-handler
   "Print handler which renders the value using the printer's unknown type logic."
   [printer value]
   (fv/visit-unknown printer value))
-
 
 (defn tagged-handler
   "Generates a print handler function which renders a tagged-literal with the
@@ -304,7 +287,6 @@
     [printer value]
     (format-doc printer (tagged-literal tag (value-fn value)))))
 
-
 (def platform-handlers
   "Map of print handlers for Java/JavaScript types. This supports syntax for regular
   expressions, dates, UUIDs, and futures."
@@ -321,37 +303,27 @@
                 (let [dt (from-date x)
                       date-formatter (cljs-time.format/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00")]
                   (cljs-time.format/unparse date-formatter dt)))))
-
-
     #?(:clj java.util.UUID
        :cljs uuid?)
     (tagged-handler 'uuid str)}
-
    #?(:clj
       {java.lang.Class
        (fn class-handler
          [printer value]
          (format-unknown printer value "Class" (get-type-name value)))
-
-
-
        java.util.concurrent.Future
        (fn future-handler
          [printer value]
          (let [doc (if (is-resolved-multi value)
                      (format-doc printer @value)
                      (color/document printer :nil "pending"))]
-           (format-unknown printer value "Future" doc)))
-
-       })
-   
+           (format-unknown printer value "Future" doc)))})
    #?(:cljs
       {object?
        (tagged-handler
-        'object
+        'js
         (fn [x]
           (js->clj x)))})))
-
 
 (def clojure-handlers
   "Map of print handlers for 'primary' Clojure types. These should take
@@ -361,7 +333,6 @@
    (fn atom-handler
      [printer value]
      (format-unknown printer value "Atom" (format-doc printer @value)))
-
    #?(:clj clojure.lang.Delay
       :cljs #(implements? Delay %))
    (fn delay-handler
@@ -370,13 +341,11 @@
                  (format-doc printer @value)
                  (color/document printer :nil "pending"))]
        (format-unknown printer value "Delay" doc)))
-
    #?(:clj clojure.lang.ISeq
       :cljs seq?)
    (fn iseq-handler
      [printer value]
      (fv/visit-seq printer value))})
-
 
 (def clojure-interface-handlers
   "Fallback print handlers for other Clojure interfaces."
@@ -388,7 +357,6 @@
                  (format-doc printer @value)
                  (color/document printer :nil "pending"))]
        (format-unknown printer value doc)))
-
    #?(:clj clojure.lang.Fn
       :cljs fn?)
    (fn fn-handler
@@ -420,14 +388,13 @@
 
 
 ;; ## Canonical Printer Implementation
-
 (defrecord CanonicalPrinter
+
     [print-handlers]
 
   fv/IVisitor
 
-                                        ; Primitive Types
-
+  ;; Primitive Types
   (visit-nil
     [this]
     "nil")
@@ -456,9 +423,7 @@
     [this value]
     (str value))
 
-
-                                        ; Collection Types
-
+  ;; Collection Types
   (visit-seq
     [this value]
     (if (seq value)
@@ -490,32 +455,28 @@
         [:group "{" [:align (interpose " " entries)] "}"])
       "{}"))
 
-
-                                        ; Clojure Types
-
+  ;; Clojure Types
   (visit-meta
     [this metadata value]
-                                        ; Metadata is not printed for canonical rendering.
+    ;; Metadata is not printed for canonical rendering.
     (format-doc* this value))
 
   (visit-var
     [this value]
-                                        ; Defer to unknown, cover with handler.
+    ;; Defer to unknown, cover with handler.
     (fv/visit-unknown this value))
 
   (visit-pattern
     [this value]
-                                        ; Defer to unknown, cover with handler.
+    ;; Defer to unknown, cover with handler.
     (fv/visit-unknown this value))
 
   (visit-record
     [this value]
-                                        ; Defer to unknown, cover with handler.
+    ;; Defer to unknown, cover with handler.
     (fv/visit-unknown this value))
 
-
-                                        ; Special Types
-
+  ;; Special Types
   (visit-tagged
     [this value]
     [:span (str "#" (:tag value)) " " (format-doc this (:form value))])
@@ -539,16 +500,12 @@
    (assoc (CanonicalPrinter. handlers)
           :width 0)))
 
-
 ;; Remove automatic constructor function.
 #?(:clj (ns-unmap *ns* '->CanonicalPrinter))
 
-
-
-
 ;; ## Pretty Printer Implementation
-
 (defrecord PrettyPrinter
+
     [width
      print-meta
      sort-keys
@@ -564,8 +521,7 @@
 
   fv/IVisitor
 
-                                        ; Primitive Types
-
+  ;; Primitive Types
   (visit-nil
     [this]
     (color/document this :nil "nil"))
@@ -594,9 +550,7 @@
     [this value]
     (color/document this :symbol (str value)))
 
-
-                                        ; Collection Types
-
+  ;; Collection Types
   (visit-seq
     [this value]
     (if (seq value)
@@ -646,23 +600,21 @@
             entries (map (fn [[k v]]
                            [:span
                             (format-doc this k)
-                            (if (coll? v)                              
+                            (if (coll? v)
                               map-coll-separator
-                              " ") ;; Original value " "
+                              " ")
                             (format-doc this v)])
                          kvs)
             map-doc [:group
                      (color/document this :delimiter "{")
-                     [:align (interpose [:span map-delimiter :line] entries)]     
+                     [:align (interpose [:span map-delimiter :line] entries)]
                      (color/document this :delimiter "}")]]
         (if common-ns
           [:group (color/document this :tag (str "#:" common-ns)) :line map-doc]
           map-doc))
       (color/document this :delimiter "{}")))
 
-
-                                        ; Clojure Types
-
+  ;; Clojure Types
   (visit-meta
     [this metadata value]
     (if print-meta
@@ -690,9 +642,7 @@
      (tagged-literal (symbol (get-type-name value))
                      (into {} value))))
 
-
-                                        ; Special Types
-
+  ;; Special Types
   (visit-tagged
     [this value]
     (let [{:keys [tag form]} value]
@@ -738,15 +688,10 @@
        (reduce merge-options)
        (map->PrettyPrinter)))
 
-
 ;; Remove automatic constructor function.
 #?(:clj (ns-unmap *ns* '->PrettyPrinter))
 
-
-
-
 ;; ## Printing Functions
-
 (defn render-out
   "Prints a value using the given printer."
   ([printer value]
@@ -758,7 +703,6 @@
       (merge {:width (:width printer)}
              opts)))))
 
-
 (defn render-str
   "Renders a value to a string using the given printer."
   ^String
@@ -766,7 +710,6 @@
   (str/trim-newline
    (with-out-str
      (render-out printer value))))
-
 
 (defn pprint
   "Pretty-prints a value to *out*. Options may be passed to override the
@@ -776,7 +719,6 @@
   ([value opts]
    (render-out (pretty-printer opts) value opts)))
 
-
 (defn pprint-str
   "Pretty-print a value to a string."
   ([value]
@@ -784,14 +726,12 @@
   ([value opts]
    (render-str (pretty-printer opts) value)))
 
-
 (defn cprint
   "Like pprint, but turns on colored output."
   ([value]
    (cprint value nil))
   ([value opts]
    (pprint value (assoc opts :print-color true))))
-
 
 (defn cprint-str
   "Pretty-prints a value to a colored string."

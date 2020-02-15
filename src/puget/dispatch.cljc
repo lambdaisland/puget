@@ -5,12 +5,9 @@
 
   A simple example is a map from classes to values, which can be used directly
   as a lookup function."
-  (:require
-   [clojure.string :as str]
-   #?(:cljs [goog.string :as gstring])))
+  (:require [clojure.string :as str]))
 
 ;; ## Logical Dispatch
-
 (defn chained-lookup
   "Builds a dispatcher which looks up a type by checking multiple dispatchers
   in order until a matching entry is found. Takes either a single collection of
@@ -21,7 +18,7 @@
    (let [candidates (remove nil? dispatchers)
          no-chain-lookup-provided-message "chained-lookup must be provided at least one dispatch function to try."]
      (when (empty? candidates)
-       #?(:clj (throw (IllegalArgumentException. no-chain-lookup-provided-message)) ; I don't like this. Candidate for improvement
+       #?(:clj (throw (IllegalArgumentException. no-chain-lookup-provided-message))
           :cljs (throw no-chain-lookup-provided-message)))
      (if (= 1 (count candidates))
        (first candidates)
@@ -30,7 +27,6 @@
          (some #(% t) candidates)))))
   ([a b & more]
    (chained-lookup (list* a b more))))
-
 
 (defn caching-lookup
   "Builds a dispatcher which caches values returned for each type. This improves
@@ -47,9 +43,7 @@
             (swap! cache assoc t v)
             v))))))
 
-
 ;; Space for predicate-lookup. ClojureScript support
-
 #?(:cljs
    (defn predicate-lookup
      "Look up a handler for a value based on a map from predicate to handler"
