@@ -9,7 +9,6 @@
     [clojure.string :as str]
     [puget.color :as color]))
 
-
 (def style-attribute
   "Map from keywords usable in a color-scheme value to vectors
   representing css style attributes"
@@ -41,7 +40,6 @@
    :bg-256     nil
    :bg-reset   nil})
 
-
 (defn style
   "Returns a formatted style attribute for a span given a seq of
   keywords usable in a :color-scheme value"
@@ -51,12 +49,10 @@
          (str/join ";" (map (fn [[k v]] (str (name k) ":" v)) attributes))
          "\"")))
 
-
 (defn escape-html-text
   "Escapes special characters into HTML entities."
   [text]
   (str/escape text {\& "&amp;" \< "&lt;" \> "&gt;" \" "&quot;"}))
-
 
 (defn escape-html-node
   "Applies HTML escaping to the node if it is a string. Returns a print
@@ -78,12 +74,10 @@
               spans))
     node))
 
-
 (defn escape-html-document
   "Escapes special characters into fipp :span/:escaped nodes"
   [document]
   (clojure.walk/postwalk escape-html-node document))
-
 
 (defmethod color/document :html-inline
   [options element document]
@@ -93,20 +87,17 @@
      [:pass "</span>"]]
     (escape-html-document document)))
 
-
 (defmethod color/text :html-inline
   [options element text]
   (if-let [codes (-> options :color-scheme (get element) seq)]
     (str "<span " (style codes) ">" (escape-html-text text) "</span>")
     (escape-html-text text)))
 
-
 (defmethod color/document :html-classes
   [options element document]
   [:span [:pass "<span class=\"" (name element) "\">"]
    (escape-html-document document)
    [:pass "</span>"]])
-
 
 (defmethod color/text :html-classes
   [options element text]

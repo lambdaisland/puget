@@ -5,7 +5,7 @@ Puget
 [![Coverage Status](https://codecov.io/gh/greglook/puget/branch/master/graph/badge.svg)](https://codecov.io/gh/greglook/puget/branch/master)
 [![cljdoc](https://cljdoc.org/badge/mvxcvi/puget)](https://cljdoc.org/d/mvxcvi/puget/CURRENT)
 
-Puget is a Clojure library for printing Clojure and
+Puget is a Clojure/Script library for printing Clojure/Script and
 [EDN](https://github.com/edn-format/edn) values. Under the hood, Puget formats
 data into _print documents_ and uses
 [fipp](https://github.com/brandonbloom/fipp) to render them.

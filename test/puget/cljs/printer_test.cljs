@@ -2,8 +2,36 @@
   (:require [cljs.test :refer [are deftest is testing]]
             [puget.printer :as printer]))
 
+(defn- build-namespace-with-type
+  "Private function to build a namespace with type"
+  [input-type]
+  (str (apply str (drop-last 2 (str `_))) "/" input-type))
+
 (defrecord TestRecord
   [foo bar])
+
+(deftest get-type-names
+  (are [input expected] (= expected (printer/get-type-name input))
+    "LambdaIsland"                   "String"
+    (atom 1)                         "cljs.core/Atom"
+    (fn [x] x)                       "Function"
+    '(1 2 3)                         "cljs.core/List"
+    [1 2 3]                          "cljs.core/PersistentVector"
+    #{1 2 3}                         "cljs.core/PersistentHashSet"
+    true                             "Boolean"
+    1234N                            "Number"
+    :k                               "cljs.core/Keyword"
+    'A                               "cljs.core/Symbol"
+    {:a 1 :b 2}                      "cljs.core/PersistentArrayMap"
+    (js/Date.)                       "Date"
+    (lazy-seq [:x])                  "cljs.core/LazySeq"
+    (TestRecord. "Lambda"  "Island") (build-namespace-with-type "TestRecord")
+    (js/Object.)                     "Object"))
+
+(deftest get-identity-hashcode
+  (are [input expected] (= expected (printer/get-identity-hashcode input))
+    nil 0
+    "LambdaIsland" 228802569))
 
 (deftest canonical-primitives
   (let [local-printer (printer/canonical-printer)]
