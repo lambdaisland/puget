@@ -1,8 +1,14 @@
 /checkouts/
 /target/
+.cljs_node_repl
+node_modules
+out
 .lein-*
 .nrepl-port
 pom.xml
 pom.xml.asc
 *.jar
 *.class
+.cljs_node_repl
+.cpcache
+.#*

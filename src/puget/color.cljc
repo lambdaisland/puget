@@ -19,7 +19,6 @@
   ")
 
 ;; ## Coloring Multimethods
-
 (defn dispatch
   "Dispatches to coloring multimethods. Element should be a key from
   the color-scheme map."
@@ -27,12 +26,10 @@
   (when (:print-color options)
     (:color-markup options)))
 
-
 (defmulti document
   "Constructs a pretty print document, which may be colored if
   `:print-color` is true."
   #'dispatch)
-
 
 (defmulti text
   "Produces text colored according to the active color scheme. This is mostly
@@ -41,16 +38,12 @@
   function still obeys the `:print-color` option."
   #'dispatch)
 
-
 ;; ## Default Markup
-
 ;; The default transformation when there's no markup specified is to return the
 ;; text unaltered.
-
 (defmethod document nil
   [options element text]
   text)
-
 
 (defmethod text nil
   [options element text]
