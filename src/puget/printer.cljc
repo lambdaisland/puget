@@ -487,10 +487,8 @@
                                                   (get-type value)
                                                   ": "
                                                   (pr-str value))]
-      #?(:clj (throw (IllegalArgumentException. not-defined-representation-message))
-         :cljs (throw not-defined-representation-message)))))
-
-
+      (throw (ex-info not-defined-representation-message
+                      {:causes #{:undefined-representation}})))))
 
 (defn canonical-printer
   "Constructs a new canonical printer with the given handler dispatch."
@@ -661,22 +659,12 @@
       [:span (pr-str value)]
 
       :error
-      #?(:clj
-         (throw (IllegalArgumentException.
-                 (str "No defined representation for " (get-type value) ": "
-                      (pr-str value))))
-         :cljs
-         (throw (str "No defined representation for " (get-type value) ": "
-                     (pr-str value))))
-
+      (throw (ex-info (str "No defined representation for " (get-type value) ": " (pr-str value))
+                      {:causes #{:undefined-representation}}))
       (if (ifn? print-fallback)
         (print-fallback this value)
-        #?(:clj (throw (IllegalStateException.
-                        (str "Unsupported value for print-fallback: "
-                             (pr-str print-fallback))))
-           :cljs (throw (str "Unsupported value for print-fallback: "
-                             (pr-str print-fallback))))))))
-
+        (throw (ex-info (str "Unsupported value for print-fallback: " (pr-str print-fallback))
+                        {:causes #{:unsupported-value}}))))))
 
 (defn pretty-printer
   "Constructs a new printer from the given configuration."

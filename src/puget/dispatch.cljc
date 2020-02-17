@@ -18,8 +18,8 @@
    (let [candidates (remove nil? dispatchers)
          no-chain-lookup-provided-message "chained-lookup must be provided at least one dispatch function to try."]
      (when (empty? candidates)
-       #?(:clj (throw (IllegalArgumentException. no-chain-lookup-provided-message))
-          :cljs (throw no-chain-lookup-provided-message)))
+       (throw (ex-info no-chain-lookup-provided-message
+                       {:causes #{:no-chained-lookup-provided}})))
      (if (= 1 (count candidates))
        (first candidates)
        (fn lookup
@@ -55,7 +55,6 @@
              types))))
 
 ;; ## Type Dispatch (Clojure)
-
 #?(:clj
    (defn symbolic-lookup
      "Builds a dispatcher which looks up a type by checking the underlying lookup
@@ -109,7 +108,6 @@
           (case (count candidates)
             0 nil
             1 (ffirst candidates)
-            (throw (RuntimeException.
-                    (format wrong-number-of-candidates-message
-                            (count candidates) t (str/join ", " (map second candidates)))))))
+            (throw (ex-info (format wrong-number-of-candidates-message
+                                    (count candidates) t (str/join ", " (map second candidates)))))))
         (dispatch Object)))))

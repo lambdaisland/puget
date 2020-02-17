@@ -6,8 +6,9 @@
   - `:html-inline` applies inline `style` attributes to the tags.
   - `:html-classes` adds semantic `class` attributes to the tags."
   (:require
-    [clojure.string :as str]
-    [puget.color :as color]))
+   [clojure.string :as str]
+   [clojure.walk :refer [postwalk]]
+   [puget.color :as color]))
 
 (def style-attribute
   "Map from keywords usable in a color-scheme value to vectors
@@ -77,7 +78,7 @@
 (defn escape-html-document
   "Escapes special characters into fipp :span/:escaped nodes"
   [document]
-  (clojure.walk/postwalk escape-html-node document))
+  (postwalk escape-html-node document))
 
 (defmethod color/document :html-inline
   [options element document]
