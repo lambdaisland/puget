@@ -95,7 +95,7 @@
             #?@(:cljs
                 [[cljs-time.coerce :refer [from-date]]
                  [cljs-time.format :refer [formatter unparse]]
-                 [promesa.core :refer [resolved?]]])))
+                 [goog.object :as gobj]])))
 
 (defn get-type-name
   "Get the type of the given object as a string. For Clojure, gets the name of
@@ -126,13 +126,6 @@
   [input-string]
   #?(:clj (Integer/toHexString input-string)
      :cljs (.toString input-string 16)))
-
-
-#?(:clj
-   (defn is-resolved-multi
-     "Verify if a promise is resolved"
-     [promise]
-     (future-done? promise)))
 
 ;; ## Control Vars
 (def ^:dynamic *options*
@@ -303,9 +296,11 @@
                 (let [dt (from-date x)
                       date-formatter (cljs-time.format/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS-00:00")]
                   (cljs-time.format/unparse date-formatter dt)))))
+
     #?(:clj java.util.UUID
        :cljs uuid?)
     (tagged-handler 'uuid str)}
+
    #?(:clj
       {java.lang.Class
        (fn class-handler
@@ -314,16 +309,21 @@
        java.util.concurrent.Future
        (fn future-handler
          [printer value]
-         (let [doc (if (is-resolved-multi value)
+         (let [doc (if (future-done? promise)
                      (format-doc printer @value)
                      (color/document printer :nil "pending"))]
            (format-unknown printer value "Future" doc)))})
+
    #?(:cljs
       {object?
        (tagged-handler
         'js
         (fn [x]
-          (js->clj x)))})))
+          ;; non-recursive conversion to map
+          (reduce (fn [m k]
+                    (assoc m k (gobj/get x k)))
+                  {}
+                  (js/Object.keys x))))})))
 
 (def clojure-handlers
   "Map of print handlers for 'primary' Clojure types. These should take
